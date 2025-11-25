@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Debug: record the deploy commit id so we can verify the script version
-  try { console.info('Loaded script at commit: 83af991'); } catch (e) { /* ignore */ }
+  // initialize: no debug logs in production
   const scrollBtn = document.getElementById('scrollDown');
   const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
@@ -69,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
       const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
       const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      try { console.info('Triggering mailto:', mailto); } catch (e) { }
       window.location.href = mailto;
       setTimeout(closeModal, 500);
     });
@@ -79,4 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
   tools.forEach((t, idx) => {
     t.style.transitionDelay = `${idx * 80}ms`;
   });
+
+  // Smooth scroll for anchors linking to #caseStudies
+  const scrollAnchors = document.querySelectorAll('a[href="#caseStudies"]');
+  if (scrollAnchors && scrollAnchors.length) {
+    scrollAnchors.forEach(a => a.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const el = document.getElementById('caseStudies');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }));
+  }
 });
