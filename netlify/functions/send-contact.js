@@ -9,10 +9,14 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Accept JSON body (AJAX) — additional parsing could be added for urlencoded bodies
     const body = JSON.parse(event.body || '{}');
     const { name, email, message } = body || {};
 
-    if (!email || !message) {
+    // Basic validation
+    const emailRe = /^\S+@\S+\.\S+$/;
+
+    if (!email || !message || !emailRe.test(email)) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields (email, message).' }) };
     }
 
@@ -25,10 +29,16 @@ exports.handler = async (event, context) => {
     }
 
     const payload = {
-      personalizations: [{ to: [{ email: RECIPIENT_EMAIL }], subject: `Site contact from ${name || 'Visitor'}` }],
+      personalizations: [{
+        to: [{ email: RECIPIENT_EMAIL }],
+        subject: `Site contact from ${name || 'Visitor'}`
+      }],
       from: { email: FROM_EMAIL, name: 'Kenway Rogers Site' },
-      content: [{ type: 'text/plain', value: `From: ${name || 'Anonymous'} <${email}>
-\nMessage:\n${message}` }]
+      reply_to: { email: email, name: name || '' },
+      content: [
+        { type: 'text/plain', value: `From: ${name || 'Anonymous'} <${email}>\n\nMessage:\n${message}` },
+        { type: 'text/html', value: `<p><strong>From:</strong> ${name || 'Anonymous'} &lt;${email}&gt;</p><p><strong>Message:</strong></p><p>${(message || '').replace(/\n/g, '<br/>')}</p>` }
+      ]
     };
 
     const res = await fetch(SENDGRID_API_URL, {

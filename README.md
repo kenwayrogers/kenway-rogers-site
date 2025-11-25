@@ -52,14 +52,29 @@ If you'd like form submissions to be sent as emails immediately (instead of rely
 2. In Netlify's UI, go to Site Settings → Build & deploy → Environment → Environment variables and add:
 	- `SENDGRID_API_KEY` = your SendGrid API key
 	- `CONTACT_RECIPIENT_EMAIL` = `kenwayrogers@gmail.com` (the target recipient)
-	- (Optional) `FROM_EMAIL` = the verified sender email you want to use (e.g., `noreply@yourdomain.com`)
+	- (Optional but recommended) `FROM_EMAIL` = the verified sender email you want to use (e.g., `noreply@yourdomain.com`)
 3. Deploy the site (Netlify will deploy functions automatically).
 4. The contact modal will use the function endpoint `/.netlify/functions/send-contact` to forward messages to SendGrid (this is the AJAX endpoint the site uses).
 
 Notes:
 - SendGrid requires a verified sender for `FROM_EMAIL` unless you have domain authentication.
+- Best practices and reply-to behavior:
+	- It's best practice to set `FROM_EMAIL` to a sender email address you control (e.g., `hello@yourdomain.com`). SendGrid requires that `FROM_EMAIL` be a verified sender or domain, otherwise messages may be rejected.
+	- The contact form uses the visitor's submitted email as the `reply_to` address, so replies to the received message go directly to the visitor's email while the message itself is delivered from `FROM_EMAIL`.
 - If you prefer another provider (Mailjet, Mailgun), I can adapt the function to that API.
 - When testing locally, the function will not run; deploy to Netlify and test there.
+Local function testing
+----------------------
+To test serverless functions locally, install Netlify CLI:
+
+```bash
+npm install -g netlify-cli
+
+# then run from the repo root
+netlify dev
+```
+
+This runs a local server with Netlify Functions available at `/.netlify/functions/*`, where you can trigger `send-contact`. Use the contact form in the site to test the full flow.
 Note: The form sends submissions using AJAX so the user experience stays in the modal and you can control success/failure messages.
 
 
