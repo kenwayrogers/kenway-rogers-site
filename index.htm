@@ -1,150 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kenway Rogers – Object Provenance & Acquisition</title>
-
-    <style>
-        /* RESET */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Georgia", serif;
-            background-color: #151515;
-            color: #f2e9d8;
-            line-height: 1.6;
-        }
-
-        /* HERO SECTION */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            background-image: url('hero.jpg'); /* Replace this with your actual hero image filename */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        /* Dark gradient overlay */
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 0, 0, 0.2),
-                rgba(0, 0, 0, 0.6)
-            );
-        }
-
-        /* Hero text */
-        .hero-content {
-            position: absolute;
-            bottom: 8%;
-            left: 6%;
-            max-width: 600px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-        }
-
-        /* CONTENT SECTIONS */
-        section {
-            padding: 5rem 10%;
-            max-width: 900px;
-            margin: auto;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 1.2rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            font-size: 0.9rem;
-            opacity: 0.6;
-        }
-
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.1rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explorer Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-
-    <!-- HERO SPLASH -->
-    <div class="hero">
-        <div class="hero-content">
-            <div class="hero-title">Kenway Rogers</div>
-            <div class="hero-subtitle">Object Provenance & Acquisition Specialist</div>
-        </div>
+  <header class="hero">
+    <img src="hero-image.jpeg" alt="Hero Image" class="hero-image" />
+    <div class="hero-overlay">
+      <h1 class="hero-title">Adventurer & Treasure-Seeker</h1>
+      <p class="hero-subtitle">Exploration • Investigation • Discovery</p>
+      <a href="#case-studies" class="scroll-down">Scroll Down</a>
     </div>
+  </header>
 
-    <!-- ABOUT SECTION -->
-    <section id="about">
-        <h2>About the Work</h2>
-        <p>
-            I track down the identity, history, and origin of lost or obscure objects —
-            from childhood toys and antiques to rare discontinued items.
-            If something has a story, I find the thread and follow it.
-        </p>
-        <p>
-            My work combines research, investigation, open-source intelligence,
-            and a lifetime of curiosity. Every object leaves a trail. 
-            I help people find it.
-        </p>
-    </section>
-
-    <!-- CASE STUDIES SECTION -->
-    <section id="cases">
-        <h2>Selected Cases</h2>
-        <p>
-            More examples will be added soon — including object identifications,
-            provenance trails, recovered items, and unusual investigations.
-        </p>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>
-            For inquiries, collaborations, or requests:  
-            <strong>kenwayrogers@yourdomain.com</strong>
-        </p>
-        <p>
-            Full website and case library coming soon.
-        </p>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        © 2025 Kenway Rogers — All Rights Reserved
-    </footer>
-
+  <section id="case-studies" class="case-studies">
+    <h2>Case Studies</h2>
+    <div class="cases">
+      <div class="case-item">
+        <h3>Ancient Ruins Expedition</h3>
+        <p>Uncovering forgotten structures and deciphering lost markings.</p>
+      </div>
+      <div class="case-item">
+        <h3>Hidden Vault Investigation</h3>
+        <p>Tracking clues and navigating traps to reach long-lost artefacts.</p>
+      </div>
+      <div class="case-item">
+        <h3>Map of the Emerald Expanse</h3>
+        <p>Creating detailed navigation charts through uncharted wilderness.</p>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
