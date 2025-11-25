@@ -67,12 +67,12 @@ body {
   /* Add subtle grain on top of the texture to keep readability */
 .hero .cta::before,
 .hero .cta::after { display: none; }
-.hero .cta:hover img { transform: translateY(-6px) rotate(-1deg) scale(1.01); box-shadow: 0 18px 44px rgba(0,0,0,0.42); }
-.hero .cta:active img { transform: translateY(-1px) rotate(0deg); box-shadow: 0 8px 22px rgba(0,0,0,0.34); }
+.hero .cta:hover img { transform: translateY(-6px) rotate(-1deg) scale(1.01); }
+.hero .cta:active img { transform: translateY(-1px) rotate(0deg); }
 .hero .cta:focus { outline: 3px solid rgba(189,144,99,0.18); outline-offset: 3px; }
 
 /* Make CTA images responsive and apply transition */
-.hero .cta img { display:block; max-width: 420px; width: 32vw; height: auto; margin: 0 auto; transition: transform 0.13s cubic-bezier(.2,.9,.2,1), filter 0.13s, box-shadow 0.13s; }
+.hero .cta img { display:block; max-width: 420px; width: 32vw; height: auto; margin: 0 auto; transition: transform 0.13s cubic-bezier(.2,.9,.2,1), filter 0.13s; }
 
 .scroll-indicator { position: absolute; left: 50%; transform: translateX(-50%); bottom: 28px; background: rgba(255,255,255,0.06); color: #efe6d8; border-radius: 40px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.04); cursor:pointer; display:inline-flex; gap:8px; align-items:center; font-weight:700; backdrop-filter: blur(6px); }
 .scroll-indicator { z-index: 3; }
