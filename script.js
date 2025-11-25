@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
 
+  // global scroll duration (ms) — increase for a slower feel
+  const SCROLL_DURATION = 1800;
   // custom smooth scroll function to control duration (ms)
   function smoothScrollTo(element, duration = 900) {
     const nav = document.querySelector('.site-nav');
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (scrollBtn && target) {
-    scrollBtn.addEventListener('click', () => smoothScrollTo(target, 900));
+  scrollBtn.addEventListener('click', () => smoothScrollTo(target, SCROLL_DURATION));
   }
 
   // Parallax effect for hero background
@@ -143,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollAnchors.forEach(a => a.addEventListener('click', (ev) => {
         ev.preventDefault();
         const el = document.getElementById('caseStudies');
-        if (el) smoothScrollTo(el, 900);
+        if (el) smoothScrollTo(el, SCROLL_DURATION);
       }));
   }
 });
