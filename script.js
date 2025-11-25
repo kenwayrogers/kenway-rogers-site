@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Debug: record the deploy commit id so we can verify the script version
+  try { console.info('Loaded script at commit: 83af991'); } catch (e) { /* ignore */ }
   const scrollBtn = document.getElementById('scrollDown');
   const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
