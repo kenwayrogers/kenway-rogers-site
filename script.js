@@ -101,7 +101,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const mainBtn = wrapper.querySelector('.email-main');
       const options = wrapper.querySelector('.email-options');
       const optBtns = wrapper.querySelectorAll('.email-option');
+      const resetBtn = wrapper.querySelector('.email-reset');
       if (!mainBtn || !options) return;
+      // ensure each options block has an id for aria-controls
+      if (!options.id) options.id = `email-options-${Math.random().toString(36).slice(2, 8)}`;
+      mainBtn.setAttribute('aria-controls', options.id);
+
+      // role/tabindex/aria for options
+      optBtns.forEach((o) => {
+        o.setAttribute('role', 'menuitemradio');
+        o.setAttribute('tabindex', '-1');
+        if (!o.hasAttribute('aria-checked')) o.setAttribute('aria-checked', 'false');
+      });
+
+      // load saved preference (optional remember)
+      const STORAGE_KEY = 'kr_email_kind';
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        // mark saved option as checked
+        optBtns.forEach(o => o.setAttribute('aria-checked', (o.dataset.kind === saved).toString()));
+      }
       const toggleMenu = (show) => {
         const expanded = show ?? (mainBtn.getAttribute('aria-expanded') === 'true');
         const willOpen = typeof show === 'undefined' ? !expanded : show;
@@ -109,15 +128,47 @@ document.addEventListener('DOMContentLoaded', () => {
         options.setAttribute('aria-hidden', !willOpen);
         if (willOpen) optBtns[0]?.focus();
       };
-      mainBtn.addEventListener('click', (ev) => { ev.preventDefault(); toggleMenu(); });
+      mainBtn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        // if user has a saved preference, directly open that, otherwise show menu
+        const savedNow = localStorage.getItem(STORAGE_KEY);
+        // Alt/Ctrl/Shift click will open the menu even if a preference exists
+        if (savedNow && !ev.altKey && !ev.ctrlKey && !ev.shiftKey) {
+          const choice = savedNow;
+          // 'gmail' opens compose in a new tab
+          const data = new FormData(form);
+          const email = data.get('email') || '';
+          const name = data.get('name') || '';
+          const message = data.get('message') || '';
+          const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
+          const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+          if (choice === 'gmail') {
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(gmailUrl, '_blank', 'noopener');
+          } else {
+            const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailto;
+          }
+          setTimeout(closeModal, 500);
+        } else {
+          toggleMenu();
+        }
+      });
+
+      // keyboard interactions for main button
+      mainBtn.addEventListener('keydown', (ev) => {
+        if (ev.key === 'ArrowDown') { ev.preventDefault(); toggleMenu(true); optBtns[0]?.focus(); }
+        if (ev.key === 'ArrowUp') { ev.preventDefault(); toggleMenu(true); optBtns[optBtns.length-1]?.focus(); }
+      });
       // close on outside click
       document.addEventListener('click', (ev) => { if (!wrapper.contains(ev.target)) toggleMenu(false); });
       // escape to close
       document.addEventListener('keyup', (ev) => { if (ev.key === 'Escape') toggleMenu(false); });
-      // option behavior
-      optBtns.forEach(btn => btn.addEventListener('click', (ev) => {
+      // option behavior (click and keyboard activation)
+      optBtns.forEach((btn, idx) => {
+        const activate = (ev, remember = true) => {
         ev.preventDefault();
-        const kind = btn.dataset.kind || 'gmail';
+          const kind = btn.dataset.kind || 'gmail';
         const data = new FormData(form);
         const email = data.get('email') || '';
         const name = data.get('name') || '';
@@ -131,9 +182,43 @@ document.addEventListener('DOMContentLoaded', () => {
           const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           window.location.href = mailto;
         }
-        toggleMenu(false);
+          // set aria-checked state & optionally remember
+          optBtns.forEach(o => o.setAttribute('aria-checked', 'false'));
+          btn.setAttribute('aria-checked', 'true');
+          if (remember) localStorage.setItem(STORAGE_KEY, kind);
+          toggleMenu(false);
         setTimeout(closeModal, 500);
-      }));
+        };
+        btn.addEventListener('click', (ev) => activate(ev, true));
+        btn.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); activate(ev, !ev.shiftKey); }
+          else if (ev.key === 'ArrowDown') { ev.preventDefault(); optBtns[(idx+1)%optBtns.length].focus(); }
+          else if (ev.key === 'ArrowUp') { ev.preventDefault(); optBtns[(idx-1+optBtns.length)%optBtns.length].focus(); }
+          else if (ev.key === 'Home') { ev.preventDefault(); optBtns[0].focus(); }
+          else if (ev.key === 'End') { ev.preventDefault(); optBtns[optBtns.length-1].focus(); }
+          else if (ev.key === 'Escape') { ev.preventDefault(); toggleMenu(false); mainBtn.focus(); }
+        });
+      });
+
+      // reset preference behavior
+      if (resetBtn) {
+        resetBtn.setAttribute('role', 'menuitem');
+        resetBtn.setAttribute('tabindex', '-1');
+        resetBtn.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          localStorage.removeItem(STORAGE_KEY);
+          optBtns.forEach(o => o.setAttribute('aria-checked', 'false'));
+          // close and focus main
+          toggleMenu(false);
+          mainBtn.focus();
+        });
+        resetBtn.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); resetBtn.click(); }
+          else if (ev.key === 'ArrowDown') { ev.preventDefault(); optBtns[0].focus(); }
+          else if (ev.key === 'ArrowUp') { ev.preventDefault(); optBtns[optBtns.length-1].focus(); }
+          else if (ev.key === 'Escape') { ev.preventDefault(); toggleMenu(false); mainBtn.focus(); }
+        });
+      }
     });
   }
 

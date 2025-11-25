@@ -77,6 +77,18 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .email-option { display:block; width:100%; text-align:left; padding: 8px 10px; background:transparent; border:0; font-weight:600; color:#23180f; border-radius:6px; cursor:pointer; }
 .email-option:hover { background: rgba(0,0,0,0.04); }
 
+/* Visual caret on the main menu button */
+.email-main::after { content: "▾"; margin-left:8px; opacity:0.9; font-size:0.9em; display:inline-block; transition: transform 180ms ease; }
+.email-main[aria-expanded="true"]::after { transform: rotate(180deg); }
+
+/* Focus and checked states for accessibility */
+.email-option:focus { outline: 3px solid rgba(36, 20, 80, 0.12); background: rgba(0,0,0,0.03); }
+.email-option[aria-checked="true"] { background: rgba(0,0,0,0.06); font-weight:700; }
+
+/* Reset/clear preference button */
+.email-reset { display:block; width:100%; text-align:left; padding: 8px 10px; background:transparent; border:0; font-size:0.85em; color:#8b5f3d; border-radius:6px; cursor:pointer; margin-top:6px; }
+.email-reset:hover { background: rgba(0,0,0,0.03); }
+
 @media(max-width: 560px) {
   .modal { max-width: 95%; padding: 14px; }
 }
