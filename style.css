@@ -71,6 +71,11 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .modal .cta { margin-top: 12px; }
 .modal .form-actions { display:flex; gap:12px; align-items:center; }
 .modal .cta.secondary { background: linear-gradient(180deg, rgba(115,140,155,0.12), rgba(55,65,75,0.08)); color: #111; border: 1px solid rgba(0,0,0,0.06); box-shadow:none; }
+.email-menu-wrapper { position: relative; display:inline-block; }
+.email-options { position:absolute; left:0; right:auto; top:110%; background: #fffaf3; border-radius:6px; box-shadow: 0 10px 28px rgba(0,0,0,0.18); padding:8px; display:none; min-width:160px; z-index:999; }
+.email-options[aria-hidden="false"] { display:block; }
+.email-option { display:block; width:100%; text-align:left; padding: 8px 10px; background:transparent; border:0; font-weight:600; color:#23180f; border-radius:6px; cursor:pointer; }
+.email-option:hover { background: rgba(0,0,0,0.04); }
 
 @media(max-width: 560px) {
   .modal { max-width: 95%; padding: 14px; }

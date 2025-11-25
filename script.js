@@ -70,20 +70,46 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = mailto;
       setTimeout(closeModal, 500);
     });
-    // 'Compose in Gmail' button: open Gmail compose in new tab
-    const gmailBtns = document.querySelectorAll('.compose-gmail');
-    gmailBtns.forEach(btn => btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-      const email = data.get('email') || '';
-      const name = data.get('name') || '';
-      const message = data.get('message') || '';
-      const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
-      const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.open(gmailUrl, '_blank', 'noopener');
-      setTimeout(closeModal, 500);
-    }));
+    // Email menu: single button shows Gmail/Other options
+    const emailWrappers = document.querySelectorAll('.email-menu-wrapper');
+    emailWrappers.forEach(wrapper => {
+      const mainBtn = wrapper.querySelector('.email-main');
+      const options = wrapper.querySelector('.email-options');
+      const optBtns = wrapper.querySelectorAll('.email-option');
+      if (!mainBtn || !options) return;
+      const toggleMenu = (show) => {
+        const expanded = show ?? (mainBtn.getAttribute('aria-expanded') === 'true');
+        const willOpen = typeof show === 'undefined' ? !expanded : show;
+        mainBtn.setAttribute('aria-expanded', willOpen);
+        options.setAttribute('aria-hidden', !willOpen);
+        if (willOpen) optBtns[0]?.focus();
+      };
+      mainBtn.addEventListener('click', (ev) => { ev.preventDefault(); toggleMenu(); });
+      // close on outside click
+      document.addEventListener('click', (ev) => { if (!wrapper.contains(ev.target)) toggleMenu(false); });
+      // escape to close
+      document.addEventListener('keyup', (ev) => { if (ev.key === 'Escape') toggleMenu(false); });
+      // option behavior
+      optBtns.forEach(btn => btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const kind = btn.dataset.kind || 'gmail';
+        const data = new FormData(form);
+        const email = data.get('email') || '';
+        const name = data.get('name') || '';
+        const message = data.get('message') || '';
+        const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
+        const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+        if (kind === 'gmail') {
+          const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.open(gmailUrl, '_blank', 'noopener');
+        } else {
+          const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = mailto;
+        }
+        toggleMenu(false);
+        setTimeout(closeModal, 500);
+      }));
+    });
   }
 
   // No hero tool icons; nothing to wire up here

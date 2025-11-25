@@ -49,6 +49,7 @@ In addition to the mailto link, there's a "Compose in Gmail" button in the conta
 Notes:
 - The Gmail button requires the user to be signed in to Gmail in their browser; otherwise it will prompt sign-in.
 - This is a convenience alternative — both the mailto option and Gmail compose are available in the modal.
+ - The UI exposes a single "Send Email" action that opens a selector; Gmail (web) is the default selection. If selected, Gmail will open in a new tab with a prefills; "Other" will open a standard mailto link (system email client). 
 
 Notes:
 - Because this is a `mailto:` link, the form does not send a request to a server — the user's email client must be configured to send the email.
