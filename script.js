@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
       const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
       const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      try { console.info('Triggering mailto:', mailto); } catch (e) { }
       window.location.href = mailto;
       setTimeout(closeModal, 500);
     });
