@@ -19,63 +19,39 @@ Files added/updated:
 
 Design: Rustic, parchment-like D&D flavor with tools of the trade imagery, no character portraits.
 
-Netlify deployment
-------------------
-This site is ready to be deployed directly on Netlify from this repository. No build step is required — Netlify will serve the files from the root of the repository.
+GitHub Pages deployment
+-----------------------
+This site is a plain static site and can be published via GitHub Pages with no build steps.
 
-Steps to deploy on Netlify:
-1. Create an account at https://app.netlify.com/ (if you don't already have one).
-2. Click "New site from Git" and connect your Git provider.
-3. Select the `kenway-rogers-site` repository and the `main` branch.
-4. Leave the build command blank and set the publish directory to `.` (root).
-5. Click "Deploy site".
+Steps to deploy on GitHub Pages:
+1. Push your code to GitHub (to the `main` branch).
+2. In your repository, go to Settings → Pages.
+3. Under "Build and deployment", select `main` as the branch and `/ (root)` as the folder.
+4. Save and wait for GitHub to build and publish your site.
+5. Your site will be accessible at `https://<your-github-username>.github.io/<repository-name>/`.
 
 Notes
-- Netlify's default behavior will auto-detect many static site generators; since this is a static site, there are no build steps.
-- `netlify.toml` includes caching and security headers and points Netlify at the repo root as the publish directory.
-- Keep `index.html` at the root — Netlify will serve it as the site's homepage.
+- A `index.html` at the repository root will be served as the homepage.
+- GitHub Pages is static-only; there are no serverless functions or dynamic backend support.
 
-Contact form & email delivery
---------------------------------
-This project includes a contact modal which submits form data to Netlify Forms directly. Steps to enable email notifications:
+Contact form & email behavior (static site)
+-------------------------------------------
+This site uses a client-side `mailto:` approach for the contact modal — there is no backend or 3rd-party form dependency.
 
-1. Deploy the site to Netlify from this repository.
-2. In your Netlify dashboard, go to the website settings → Forms.
-3. Locate the `contact` form (it will show up as soon as a submission is received or if you trigger a test submit).
-4. Add a notification rule in the Netlify UI to notify an email address (e.g., `kenwayrogers@gmail.com`) on new submissions, or connect to Zapier/SendGrid for other email delivery flows.
-
-Alternatively (direct email delivery)
-----------------------------------
-If you'd like form submissions to be sent as emails immediately (instead of relying on Netlify's UI notifications), you can use the serverless function included in `netlify/functions/send-contact.js` which forwards messages to a transactional email provider (SendGrid). To use it:
-
-1. Register for a SendGrid account and create an API key.
-2. In Netlify's UI, go to Site Settings → Build & deploy → Environment → Environment variables and add:
-	- `SENDGRID_API_KEY` = your SendGrid API key
-	- `CONTACT_RECIPIENT_EMAIL` = `kenwayrogers@gmail.com` (the target recipient)
-	- (Optional but recommended) `FROM_EMAIL` = the verified sender email you want to use (e.g., `noreply@yourdomain.com`)
-3. Deploy the site (Netlify will deploy functions automatically).
-4. The contact modal will use the function endpoint `/.netlify/functions/send-contact` to forward messages to SendGrid (this is the AJAX endpoint the site uses).
+How it works:
+- When a user fills the contact form and clicks "Send Message", JavaScript builds a `mailto:` URI (to `kenwayrogers@gmail.com`) with a subject and message body prefilled.
+- This opens the user's default email client (desktop or web client configured to handle mailto links). The user then sends the message directly from their email client.
 
 Notes:
-- SendGrid requires a verified sender for `FROM_EMAIL` unless you have domain authentication.
-- Best practices and reply-to behavior:
-	- It's best practice to set `FROM_EMAIL` to a sender email address you control (e.g., `hello@yourdomain.com`). SendGrid requires that `FROM_EMAIL` be a verified sender or domain, otherwise messages may be rejected.
-	- The contact form uses the visitor's submitted email as the `reply_to` address, so replies to the received message go directly to the visitor's email while the message itself is delivered from `FROM_EMAIL`.
-- If you prefer another provider (Mailjet, Mailgun), I can adapt the function to that API.
-- When testing locally, the function will not run; deploy to Netlify and test there.
-Local function testing
-----------------------
-To test serverless functions locally, install Netlify CLI:
-
+- Because this is a `mailto:` link, the form does not send a request to a server — the user's email client must be configured to send the email.
+- If no email client is configured, the browser may show an error or nothing will happen. To accept messages without a mailto client, a server-side service or third-party form provider would be required.
+Local testing
+-------------
+To test locally, serve the site with Python's http server and open it in a browser. Then open DevTools to watch the console logs when the form triggers the mailto link.
 ```bash
-npm install -g netlify-cli
-
-# then run from the repo root
-netlify dev
+python3 -m http.server 8000
+# then open http://localhost:8000/index.html
 ```
-
-This runs a local server with Netlify Functions available at `/.netlify/functions/*`, where you can trigger `send-contact`. Use the contact form in the site to test the full flow.
-Note: The form sends submissions using AJAX so the user experience stays in the modal and you can control success/failure messages.
 
 
 
