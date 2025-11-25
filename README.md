@@ -44,6 +44,22 @@ This project includes a contact modal which submits form data to Netlify Forms d
 3. Locate the `contact` form (it will show up as soon as a submission is received or if you trigger a test submit).
 4. Add a notification rule in the Netlify UI to notify an email address (e.g., `kenwayrogers@gmail.com`) on new submissions, or connect to Zapier/SendGrid for other email delivery flows.
 
+Alternatively (direct email delivery)
+----------------------------------
+If you'd like form submissions to be sent as emails immediately (instead of relying on Netlify's UI notifications), you can use the serverless function included in `netlify/functions/send-contact.js` which forwards messages to a transactional email provider (SendGrid). To use it:
+
+1. Register for a SendGrid account and create an API key.
+2. In Netlify's UI, go to Site Settings → Build & deploy → Environment → Environment variables and add:
+	- `SENDGRID_API_KEY` = your SendGrid API key
+	- `CONTACT_RECIPIENT_EMAIL` = `kenwayrogers@gmail.com` (the target recipient)
+	- (Optional) `FROM_EMAIL` = the verified sender email you want to use (e.g., `noreply@yourdomain.com`)
+3. Deploy the site (Netlify will deploy functions automatically).
+4. The contact modal will use the function endpoint `/.netlify/functions/send-contact` to forward messages to SendGrid (this is the AJAX endpoint the site uses).
+
+Notes:
+- SendGrid requires a verified sender for `FROM_EMAIL` unless you have domain authentication.
+- If you prefer another provider (Mailjet, Mailgun), I can adapt the function to that API.
+- When testing locally, the function will not run; deploy to Netlify and test there.
 Note: The form sends submissions using AJAX so the user experience stays in the modal and you can control success/failure messages.
 
 

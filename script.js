@@ -56,33 +56,33 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   document.addEventListener('keyup', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // Form submit via AJAX to Netlify Forms
+  // Form submit via AJAX to Netlify function (SendGrid)
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      // Convert to urlencoded for Netlify
-      const encode = (d) => {
-        const params = new URLSearchParams();
-        for (const [key, value] of d.entries()) params.append(key, value);
-        return params.toString();
-      };
+      const payload = Object.fromEntries(data.entries());
       const statusEl = form.querySelector('.form-status');
+      statusEl.textContent = '';
       try {
-        const res = await fetch('/', {
+        const res = await fetch('/.netlify/functions/send-contact', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: encode(data),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
         });
+        const json = await res.json().catch(() => ({}));
         if (res.ok) {
           statusEl.textContent = 'Thanks! Your message has been sent.';
+          statusEl.style.color = '#2b6a2b';
           form.reset();
-          setTimeout(closeModal, 1600);
+          setTimeout(closeModal, 1400);
         } else {
-          statusEl.textContent = 'There was a problem sending your message. Try again later.';
+          statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
+          statusEl.style.color = '#8a2b2b';
         }
       } catch (err) {
         statusEl.textContent = 'There was a problem sending your message. Try again later.';
+        statusEl.style.color = '#8a2b2b';
       }
     });
   }
