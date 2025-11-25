@@ -12,7 +12,7 @@ body {
 /* HERO: base layout and background */
 .hero {
   position: relative;
-  min-height: 78vh;
+  min-height: 100vh;
   display: block;
   overflow: hidden;
   color: #fff;
@@ -40,7 +40,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 78vh;
+  min-height: 100vh;
   padding: 64px 16px;
 }
 
