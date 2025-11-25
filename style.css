@@ -81,7 +81,7 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
   .hero-inner { flex-direction: column; gap: 12px; text-align:center; padding-top: 70px; }
   .nav-inner { padding: 12px 18px; }
   .nav-inner a { font-size: 14px; }
-  .tool-icon { width:48px; height:48px; }
+  /* tool-icon removed */
   .hero-sub { font-size: 16px; }
   .foot-inner { flex-direction: column; text-align:center; gap:8px; }
 }

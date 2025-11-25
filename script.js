@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollBtn = document.getElementById('scrollDown');
   const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
-  const tools = document.querySelectorAll('.tool-icon');
 
   if (scrollBtn && target) {
     scrollBtn.addEventListener('click', () => {
@@ -87,10 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  // Micro interactions on tool icons
-  tools.forEach((t, idx) => {
-    t.style.transitionDelay = `${idx * 80}ms`;
-  });
+  // No hero tool icons; nothing to wire up here
 
   // Smooth scroll for anchors linking to #caseStudies
   const scrollAnchors = document.querySelectorAll('a[href="#caseStudies"]');
