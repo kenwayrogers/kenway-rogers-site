@@ -57,72 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keyup', (e) => { if (e.key === 'Escape') closeModal(); });
 
   // Form submit via AJAX to Netlify function (SendGrid)
+  // Form submit via mailto: link
   if (form) {
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const payload = Object.fromEntries(data.entries());
-      const statusEl = form.querySelector('.form-status');
-      statusEl.textContent = '';
-      try {
-        const res = await fetch('/.netlify/functions/send-contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const json = await res.json().catch(() => ({}));
-        if (res.ok) {
-          statusEl.textContent = 'Thanks! Your message has been sent.';
-          statusEl.style.color = '#2b6a2b';
-          form.reset();
-          setTimeout(closeModal, 1400);
-        } else {
-          // Try fallback to Netlify Forms by posting to '/'
-          try {
-            const formData = new URLSearchParams();
-            for (const [k, v] of data.entries()) formData.append(k, v);
-            const fallback = await fetch('/', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-              body: formData.toString(),
-            });
-            if (fallback.ok) {
-              statusEl.textContent = 'Thanks! Your message was queued (fallback capture).';
-              statusEl.style.color = '#2b6a2b';
-              form.reset();
-              setTimeout(closeModal, 1400);
-            } else {
-              statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
-              statusEl.style.color = '#8a2b2b';
-            }
-          } catch (err2) {
-            statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
-            statusEl.style.color = '#8a2b2b';
-          }
-        }
-      } catch (err) {
-        // On network/form-function error, fall back to Netlify Forms
-        try {
-          const formData = new URLSearchParams();
-          for (const [k, v] of data.entries()) formData.append(k, v);
-          const fallback = await fetch('/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: formData.toString(),
-          });
-          if (fallback.ok) {
-            statusEl.textContent = 'Thanks! Your message was queued (fallback capture).';
-            statusEl.style.color = '#2b6a2b';
-            form.reset();
-            setTimeout(closeModal, 1400);
-            return;
-          }
-        } catch (err2) {
-          // ignore
-        }
-        statusEl.textContent = 'There was a problem sending your message. Try again later.';
-        statusEl.style.color = '#8a2b2b';
-      }
+      const email = data.get('email') || '';
+      const name = data.get('name') || '';
+      const message = data.get('message') || '';
+      const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
+      const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+      const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      setTimeout(closeModal, 500);
     });
   }
 
