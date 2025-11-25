@@ -35,4 +35,16 @@ Notes
 - `netlify.toml` includes caching and security headers and points Netlify at the repo root as the publish directory.
 - Keep `index.html` at the root — Netlify will serve it as the site's homepage.
 
+Contact form & email delivery
+--------------------------------
+This project includes a contact modal which submits form data to Netlify Forms directly. Steps to enable email notifications:
+
+1. Deploy the site to Netlify from this repository.
+2. In your Netlify dashboard, go to the website settings → Forms.
+3. Locate the `contact` form (it will show up as soon as a submission is received or if you trigger a test submit).
+4. Add a notification rule in the Netlify UI to notify an email address (e.g., `kenwayrogers@gmail.com`) on new submissions, or connect to Zapier/SendGrid for other email delivery flows.
+
+Note: The form sends submissions using AJAX so the user experience stays in the modal and you can control success/failure messages.
+
+
 
