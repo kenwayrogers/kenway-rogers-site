@@ -7,6 +7,49 @@ body {
   color: #2b1f15;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* HERO: base layout and background */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: block;
+  overflow: hidden;
+  color: #fff;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.22));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78vh;
+  padding: 64px 16px;
+}
+
+.hero-copy { max-width: 980px; text-align:center; }
+
+.hero-title { font-family: 'Cinzel', serif; font-size: clamp(32px, 6vw, 64px); margin: 0 0 8px; color: #fff; text-shadow: 0 3px 18px rgba(0,0,0,0.48); }
+.hero-sub { font-size: clamp(14px, 2.2vw, 20px); color: rgba(255,255,255,0.92); margin: 10px 0 18px; }
+
+/* CTA wooden plank */
 .hero .cta {
   background: url('wooden-sign.png') center center/contain no-repeat;
   background-color: transparent;
@@ -50,8 +93,6 @@ body {
   filter: brightness(0.97);
 }
   /* Add subtle grain on top of the texture to keep readability */
-  /* removed all background-image/wooden-sign.jpeg references */
-}
 .hero .cta::before,
 .hero .cta::after {
   /* small nails at each end of the wooden plank */
@@ -73,6 +114,7 @@ body {
 .hero .cta { text-shadow: 0 2px 0 rgba(60, 30, 14, 0.6), 0 -1px 0 rgba(255, 255, 255, 0.03); -webkit-text-stroke: 0.6px rgba(0,0,0,0.45); }
 
 .scroll-indicator { position: absolute; left: 50%; transform: translateX(-50%); bottom: 28px; background: rgba(255,255,255,0.06); color: #efe6d8; border-radius: 40px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.04); cursor:pointer; display:inline-flex; gap:8px; align-items:center; font-weight:700; backdrop-filter: blur(6px); }
+.scroll-indicator { z-index: 3; }
 .scroll-indicator .arrow { font-size: 22px; }
 .scroll-indicator .hint { font-size: 12px; opacity:0.9; }
 @keyframes scroll-bounce { 0%,100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, -6px); } }
@@ -144,6 +186,9 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
   .hero-sub { font-size: 16px; }
   .foot-inner { flex-direction: column; text-align:center; gap:8px; }
 }
+
+/* Ensure top nav sits above hero overlay */
+.site-nav { position: sticky; top: 0; z-index: 12; }
 
 /* About and Article */
 .about-container { max-width:900px; margin: 120px auto 40px; padding: 0 24px; color: #3f352a; }
