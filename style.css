@@ -88,6 +88,7 @@ body {
 .services-banners { display: flex; flex-direction: column; }
 .service-banner { position: relative; min-height: 400px; display: flex; align-items: center; padding: 64px 16px; overflow: hidden; }
 .service-banner::before { content: ''; position: absolute; inset: 0; background-image: url('hero-image.jpeg'); background-size: cover; background-position: center; opacity: 0.25; z-index: 0; }
+.service-banner.provenance::before { background-image: url('provenance.jpeg'); opacity: 0.35; }
 .service-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); z-index: 1; }
 .service-banner.left { justify-content: flex-start; }
 .service-banner.right { justify-content: flex-end; }
