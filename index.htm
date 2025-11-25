@@ -1,203 +1,46 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kenway Rogers</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kenway Rogers</title>
+<link rel="stylesheet" href="style.css" />
+<script defer src="script.js"></script>
 </head>
 <body>
-  <div class="hero">
-    <img src="hero-image.jpeg" class="hero-image" />
-    <div class="hero-overlay"></div>
-    <div class="hero-text">
-      <h1>Kenway Rogers</h1>
-      <p>Explorer • Analyst • Seeker of the Hidden</p>
-    </div>
-    <div class="scroll-indicator" id="scrollDown">&#x2193;</div>
-  </div>
+<div class="hero">
+<img src="hero-image.jpeg" class="hero-image" />
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1>Kenway Rogers</h1>
+<p>Explorer • Analyst • Seeker of the Hidden</p>
+</div>
+<div class="scroll-indicator" id="scrollDown">&#x2193;</div>
+</div>
 
-  <section class="case-studies" id="caseStudies">
-    <h2>Case Studies</h2>
-    <div class="card-grid">
-      <a class="card" href="case1.html">
-        <h3>The Forgotten Compass</h3>
-        <p>Uncovering the origin of a 19th‑century navigation tool.</p>
-      </a>
-      <a class="card" href="case2.html">
-        <h3>The Emerald Ledger</h3>
-        <p>A mysterious coded journal found in a market stall.</p>
-      </a>
-      <a class="card" href="case3.html">
-        <h3>Steel of the Highlands</h3>
-        <p>Tracing the lineage of an ornate ceremonial blade.</p>
-      </a>
-    </div>
-  </section>
 
-  <footer>
-    <a href="about.html" class="footer-link">About Me</a>
-    <p>© 2025 Kenway Rogers</p>
-  </footer>
+<section class="case-studies" id="caseStudies">
+<h2>Case Studies</h2>
+<div class="card-grid">
+<a class="card" href="case1.html">
+<h3>The Forgotten Compass</h3>
+<p>Uncovering the origin of a 19th‑century navigation tool.</p>
+</a>
+<a class="card" href="case2.html">
+<h3>The Emerald Ledger</h3>
+<p>A mysterious coded journal found in a market stall.</p>
+</a>
+<a class="card" href="case3.html">
+<h3>Steel of the Highlands</h3>
+<p>Tracing the lineage of an ornate ceremonial blade.</p>
+</a>
+</div>
+</section>
+
+
+<footer>
+<a href="about.html" class="footer-link">About Me</a>
+<p>© 2025 Kenway Rogers</p>
+</footer>
 </body>
 </html>
-
-<!-- style.css -->
-/* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scrollbar-width: none;
-}
-
-body {
-  font-family: Georgia, serif;
-  background: #f6f1e5;
-  overflow-y: scroll;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-}
-
-.hero-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(0.75);
-}
-
-.hero-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.2);
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #f0e6d2;
-  text-shadow: 2px 2px 8px #000;
-}
-
-.hero-text h1 {
-  font-size: 4rem;
-  letter-spacing: 2px;
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.5rem;
-  color: #f0e6d2;
-  cursor: pointer;
-  animation: bounce 1.8s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -10px); }
-}
-
-/* Case Studies */
-.case-studies {
-  padding: 80px 10%;
-  background: url("parchment-texture.jpg");
-  background-size: cover;
-}
-
-.case-studies h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  text-align: center;
-  color: #4a3b2a;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: rgba(255, 250, 240, 0.9);
-  padding: 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #3a2a1a;
-  border: 1px solid #d4c7a7;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 40px 0;
-  font-size: 0.9rem;
-  background: #e8dcc5;
-  color: #4a3b2a;
-}
-
-.footer-link {
-  display: block;
-  margin-bottom: 10px;
-  color: #4a3b2a;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* about.html */
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Kenway</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="about-container">
-    <h1>About Kenway Rogers</h1>
-    <p>
-      Some say he's a collector. Others say a decipherer of forgotten things.
-      Kenway walks the quiet places of history — the drawers, the attics, the
-      markets where time pools like dust. He finds what was lost, and tells
-      the story no one else could see.
-    </p>
-  </div>
-  <footer>
-    <a href="index.html" class="footer-link">Return Home</a>
-    <p>© 2025 Kenway Rogers</p>
-  </footer>
-</body>
-</html>
-
-/* script.js */
-const scrollBtn = document.getElementById("scrollDown");
-const target = document.getElementById("caseStudies");
-
-scrollBtn.addEventListener("click", () => {
-  target.scrollIntoView({ behavior: "smooth" });
-});
