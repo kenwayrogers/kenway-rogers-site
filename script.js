@@ -58,8 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   document.addEventListener('keyup', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  // Form submit via AJAX to Netlify function (SendGrid)
-  // Form submit via mailto: link
+  // Form submit via mailto: link (static GitHub Pages; no server-side email delivery)
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
