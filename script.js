@@ -71,6 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = mailto;
       setTimeout(closeModal, 500);
     });
+    // 'Compose in Gmail' button: open Gmail compose in new tab
+    const gmailBtns = document.querySelectorAll('.compose-gmail');
+    gmailBtns.forEach(btn => btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const email = data.get('email') || '';
+      const name = data.get('name') || '';
+      const message = data.get('message') || '';
+      const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
+      const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank', 'noopener');
+      setTimeout(closeModal, 500);
+    }));
   }
 
   // Micro interactions on tool icons

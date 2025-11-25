@@ -69,6 +69,8 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .modal label { display:block; margin-top: 12px; font-weight: 600; font-size: 13px; color: #3d2c20; }
 .modal input[type="email"], .modal input[type="text"], .modal textarea { width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(74,58,44,0.12); margin-top: 6px; font-size: 14px; resize: vertical; }
 .modal .cta { margin-top: 12px; }
+.modal .form-actions { display:flex; gap:12px; align-items:center; }
+.modal .cta.secondary { background: linear-gradient(180deg, rgba(115,140,155,0.12), rgba(55,65,75,0.08)); color: #111; border: 1px solid rgba(0,0,0,0.06); box-shadow:none; }
 
 @media(max-width: 560px) {
   .modal { max-width: 95%; padding: 14px; }
