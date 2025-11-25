@@ -21,8 +21,12 @@ body {
   text-shadow: 0 2px 0 rgba(60, 30, 14, 0.38), 0 1px 0 #fff8, 0 0.5px 0 #fff8;
   -webkit-text-stroke: 0.7px #fff8;
   padding: 0;
-  width: 340px;
-  height: 90px;
+  min-width: 260px;
+  min-height: 80px;
+  width: 32vw;
+  max-width: 420px;
+  height: auto;
+  aspect-ratio: 4.2/1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,6 +34,7 @@ body {
   cursor: pointer;
   transition: transform 0.13s cubic-bezier(.2,.9,.2,1), filter 0.13s;
   outline: none;
+  margin: 0 auto;
 }
 .hero .cta:focus {
   outline: 3px solid #e2c28a;
