@@ -69,7 +69,7 @@ body {
 .hero .cta::after { display: none; }
 .hero .cta:hover img { transform: translateY(-6px) rotate(-1deg) scale(1.01); }
 .hero .cta:active img { transform: translateY(-1px) rotate(0deg); }
-.hero .cta:focus { outline: 3px solid rgba(189,144,99,0.18); outline-offset: 3px; }
+.hero .cta:focus { outline: none; }
 
 /* Make CTA images responsive and apply transition */
 .hero .cta img { display:block; max-width: 420px; width: 32vw; height: auto; margin: 0 auto; transition: transform 0.13s cubic-bezier(.2,.9,.2,1), filter 0.13s; }
