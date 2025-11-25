@@ -91,16 +91,20 @@ body {
 .service-banner.provenance::before { background-image: url('provenance.jpeg'); opacity: 1; }
 .service-banner.acquisition::before { background-image: url('acquisition.jpeg'); opacity: 1; }
 .service-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); z-index: 1; }
-.service-banner.provenance::after { background: linear-gradient(135deg, rgba(255,252,245,0.2), rgba(250,245,235,0.25)); }
-.service-banner.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0.2), rgba(250,245,235,0.25)); }
+.service-banner.provenance::after { background: linear-gradient(135deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
+.service-banner.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner.left { justify-content: flex-start; }
 .service-banner.right { justify-content: flex-end; }
 .service-banner.right::after { background: linear-gradient(225deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); }
-.service-banner.right.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0.2), rgba(250,245,235,0.25)); }
+.service-banner.right.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner-content { position: relative; z-index: 2; width: 90%; max-width: 800px; }
 .service-icon { font-size: 56px; margin-bottom: 20px; filter: grayscale(0.3) sepia(0.4); display: inline-block; }
 .service-banner h3 { font-family: 'Cinzel', serif; font-size: 32px; margin: 0 0 16px; color: #3f352a; text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
 .service-banner p { margin: 0; color: #3f352a; line-height: 1.7; font-size: 17px; max-width: 680px; }
+.service-banner.provenance h3,
+.service-banner.provenance p { color: #fffef8; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+.service-banner.acquisition h3,
+.service-banner.acquisition p { color: #fffef8; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
 
 /* Case Studies */
 .case-studies { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
