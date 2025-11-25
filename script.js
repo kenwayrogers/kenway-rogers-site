@@ -77,10 +77,49 @@ document.addEventListener('DOMContentLoaded', () => {
           form.reset();
           setTimeout(closeModal, 1400);
         } else {
-          statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
-          statusEl.style.color = '#8a2b2b';
+          // Try fallback to Netlify Forms by posting to '/'
+          try {
+            const formData = new URLSearchParams();
+            for (const [k, v] of data.entries()) formData.append(k, v);
+            const fallback = await fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: formData.toString(),
+            });
+            if (fallback.ok) {
+              statusEl.textContent = 'Thanks! Your message was queued (fallback capture).';
+              statusEl.style.color = '#2b6a2b';
+              form.reset();
+              setTimeout(closeModal, 1400);
+            } else {
+              statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
+              statusEl.style.color = '#8a2b2b';
+            }
+          } catch (err2) {
+            statusEl.textContent = 'There was a problem sending your message. ' + (json && json.error ? json.error : 'Try again later.');
+            statusEl.style.color = '#8a2b2b';
+          }
         }
       } catch (err) {
+        // On network/form-function error, fall back to Netlify Forms
+        try {
+          const formData = new URLSearchParams();
+          for (const [k, v] of data.entries()) formData.append(k, v);
+          const fallback = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: formData.toString(),
+          });
+          if (fallback.ok) {
+            statusEl.textContent = 'Thanks! Your message was queued (fallback capture).';
+            statusEl.style.color = '#2b6a2b';
+            form.reset();
+            setTimeout(closeModal, 1400);
+            return;
+          }
+        } catch (err2) {
+          // ignore
+        }
         statusEl.textContent = 'There was a problem sending your message. Try again later.';
         statusEl.style.color = '#8a2b2b';
       }
@@ -91,11 +130,4 @@ document.addEventListener('DOMContentLoaded', () => {
   tools.forEach((t, idx) => {
     t.style.transitionDelay = `${idx * 80}ms`;
   });
-});
-const scrollBtn = document.getElementById("scrollDown");
-const target = document.getElementById("caseStudies");
-
-
-scrollBtn.addEventListener("click", () => {
-target.scrollIntoView({ behavior: "smooth" });
 });
