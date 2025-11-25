@@ -4,10 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
 
+  // custom smooth scroll function to control duration (ms)
+  function smoothScrollTo(element, duration = 900) {
+    const nav = document.querySelector('.site-nav');
+    const navHeight = nav ? nav.offsetHeight : 0;
+    const start = window.scrollY || window.pageYOffset;
+    const rect = element.getBoundingClientRect();
+    const end = rect.top + start - navHeight - 12; // small spacing
+    const distance = end - start;
+    let startTime = null;
+
+    function easeInOutQuad(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function animation(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const eased = easeInOutQuad(progress);
+      window.scrollTo(0, Math.round(start + distance * eased));
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+    requestAnimationFrame(animation);
+  }
+
   if (scrollBtn && target) {
-    scrollBtn.addEventListener('click', () => {
-      target.scrollIntoView({ behavior: 'smooth' });
-    });
+    scrollBtn.addEventListener('click', () => smoothScrollTo(target, 900));
   }
 
   // Parallax effect for hero background
@@ -117,10 +140,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Smooth scroll for anchors linking to #caseStudies
   const scrollAnchors = document.querySelectorAll('a[href="#caseStudies"]');
   if (scrollAnchors && scrollAnchors.length) {
-    scrollAnchors.forEach(a => a.addEventListener('click', (ev) => {
-      ev.preventDefault();
-      const el = document.getElementById('caseStudies');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }));
+      scrollAnchors.forEach(a => a.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        const el = document.getElementById('caseStudies');
+        if (el) smoothScrollTo(el, 900);
+      }));
   }
 });
