@@ -20,13 +20,30 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields (email, message).' }) };
     }
 
-    const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
-    const RECIPIENT_EMAIL = process.env.CONTACT_RECIPIENT_EMAIL || process.env.SEND_TO_EMAIL;
+    // Support a few common env var names: application key may be set directly
+    // as SENDGRID_API_KEY or via the Netlify Email Extension which stores a
+    // provider key under a different environment variable. We check common
+    // ones so the function works whether you set SENDGRID_API_KEY directly
+    // or used Netlify's Email integration.
+    // Determine which env var contains the sendgrid key so we can provide helpful logs.
+    let SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || process.env.NETLIFY_EMAIL_PROVIDER_API_KEY || process.env.NETLIFY_EMAIL_EXTENSION_API_KEY || process.env.NETLIFY_EMAIL_API_KEY;
+    let sendgridKeyName = null;
+    if (process.env.SENDGRID_API_KEY) sendgridKeyName = 'SENDGRID_API_KEY';
+    else if (process.env.NETLIFY_EMAIL_PROVIDER_API_KEY) sendgridKeyName = 'NETLIFY_EMAIL_PROVIDER_API_KEY';
+    else if (process.env.NETLIFY_EMAIL_EXTENSION_API_KEY) sendgridKeyName = 'NETLIFY_EMAIL_EXTENSION_API_KEY';
+    else if (process.env.NETLIFY_EMAIL_API_KEY) sendgridKeyName = 'NETLIFY_EMAIL_API_KEY';
+    // Recipient email environment variable (explicit)
+    const RECIPIENT_EMAIL = process.env.CONTACT_RECIPIENT_EMAIL || process.env.SEND_TO_EMAIL || process.env.NETLIFY_EMAIL_RECIPIENT;
     const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@' + (process.env.SITE_DOMAIN || 'example.com');
 
     if (!SENDGRID_API_KEY || !RECIPIENT_EMAIL) {
-      return { statusCode: 500, body: JSON.stringify({ error: 'Email service not configured. Set SENDGRID_API_KEY and CONTACT_RECIPIENT_EMAIL on Netlify.' }) };
+      const errors = [];
+      if (!SENDGRID_API_KEY) errors.push('SENDGRID API key not set');
+      if (!RECIPIENT_EMAIL) errors.push('CONTACT_RECIPIENT_EMAIL not set');
+      console.error('send-contact: configuration error:', errors.join('; '));
+      return { statusCode: 500, body: JSON.stringify({ error: 'Email service not configured. Set SENDGRID_API_KEY (or configure Netlify Email extension) and CONTACT_RECIPIENT_EMAIL on Netlify.' }) };
     }
+    if (sendgridKeyName) console.log(`send-contact: using ${sendgridKeyName}`);
 
     const payload = {
       personalizations: [{
