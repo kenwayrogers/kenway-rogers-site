@@ -41,6 +41,14 @@ This site uses a client-side `mailto:` approach for the contact modal — there 
 How it works:
 - When a user fills the contact form and clicks "Send Message", JavaScript builds a `mailto:` URI (to `kenwayrogers@gmail.com`) with a subject and message body prefilled.
 - This opens the user's default email client (desktop or web client configured to handle mailto links). The user then sends the message directly from their email client.
+ 
+Gmail integration (web)
+----------------------
+In addition to the mailto link, there's a "Compose in Gmail" button in the contact modal. Clicking this will open Gmail's web compose window (in a new tab) with the recipient, subject, and body prefilled, which is handy when users prefer to use Gmail web instead of a system mail client.
+
+Notes:
+- The Gmail button requires the user to be signed in to Gmail in their browser; otherwise it will prompt sign-in.
+- This is a convenience alternative — both the mailto option and Gmail compose are available in the modal.
 
 Notes:
 - Because this is a `mailto:` link, the form does not send a request to a server — the user's email client must be configured to send the email.
