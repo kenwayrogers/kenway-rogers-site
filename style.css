@@ -1,107 +1,73 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Georgia', serif;
+/* General Reset */
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 2.5rem;
+color: #f0e6d2;
+cursor: pointer;
+animation: bounce 1.8s infinite;
 }
 
-body {
-  background: #111;
-  color: #ddd;
-  overflow-x: hidden;
+
+@keyframes bounce {
+0%, 100% { transform: translate(-50%, 0); }
+50% { transform: translate(-50%, -10px); }
 }
 
-/* HERO SECTION */
-.hero {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
 
-.hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(55%);
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #f3e9d2;
-}
-
-.hero-text h1 {
-  font-size: 4rem;
-  letter-spacing: 3px;
-  margin-bottom: 0.5rem;
-}
-
-.hero-text p {
-  font-size: 1.2rem;
-  opacity: 0.85;
-}
-
-.scroll-btn {
-  margin-top: 2.5rem;
-  font-size: 2rem;
-  text-decoration: none;
-  color: #f3e9d2;
-  opacity: 0.7;
-  display: inline-block;
-  transition: opacity 0.3s;
-}
-
-.scroll-btn:hover {
-  opacity: 1;
-}
-
-/* CASE STUDIES */
+/* Case Studies */
 .case-studies {
-  padding: 5rem 2rem;
-  background: #1a1a1a;
-  text-align: center;
+padding: 80px 10%;
+background: url("parchment-texture.jpg");
+background-size: cover;
 }
+
 
 .case-studies h2 {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #e8d8b8;
+font-size: 2.5rem;
+margin-bottom: 40px;
+text-align: center;
+color: #4a3b2a;
 }
 
-.case-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: auto;
+
+.card-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 30px;
 }
 
-.case-card {
-  background: #2a2a2a;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
+
+.card {
+background: rgba(255, 250, 240, 0.9);
+padding: 20px;
+border-radius: 8px;
+text-decoration: none;
+color: #3a2a1a;
+border: 1px solid #d4c7a7;
+transition: transform 0.3s ease;
 }
 
-.case-card h3 {
-  color: #f3e9d2;
-  margin-bottom: 0.8rem;
+
+.card:hover {
+transform: translateY(-6px);
 }
 
-.case-card p {
-  color: #c9c9c9;
-  line-height: 1.5;
+
+/* Footer */
+footer {
+text-align: center;
+padding: 40px 0;
+font-size: 0.9rem;
+background: #e8dcc5;
+color: #4a3b2a;
 }
 
-.case-card.visible {
-  opacity: 1;
-  transform: translateY(0);
+
+.footer-link {
+display: block;
+margin-bottom: 10px;
+color: #4a3b2a;
+text-decoration: none;
+font-weight: bold;
 }
