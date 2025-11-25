@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // global scroll duration (ms) — increase for a slower feel
   const SCROLL_DURATION = 1800;
   // custom smooth scroll function to control duration (ms)
-  function smoothScrollTo(element, duration = 900) {
+  function smoothScrollTo(element, duration = SCROLL_DURATION) {
     const nav = document.querySelector('.site-nav');
     const navHeight = nav ? nav.offsetHeight : 0;
     const start = window.scrollY || window.pageYOffset;
