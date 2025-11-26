@@ -204,7 +204,7 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .case-study ul { color: #4a3b2a; }
 
 /* Service Detail Pages */
-.small-hero { min-height: 40vh; }
+.small-hero { min-height: 40vh; background-size: cover; background-position: center; }
 .content-section { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
 .back-link { display: inline-block; color: #8b6f47; text-decoration: none; font-size: 16px; margin-bottom: 32px; transition: color 0.3s ease; }
 .back-link:hover { color: #3f352a; }
