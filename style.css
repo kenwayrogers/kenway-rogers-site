@@ -86,12 +86,15 @@ body {
 .services h2 { font-family: 'Cinzel', serif; font-size: 36px; text-align:center; margin: 8px 0 6px; color: #3f352a; padding: 0 16px; }
 .services .lead { text-align:center; margin: 10px auto 52px auto; max-width: 780px; color: #4a3b2a; opacity:0.95; padding: 0 16px; }
 .services-banners { display: flex; flex-direction: column; }
-.service-banner { position: relative; min-height: 400px; display: flex; align-items: center; padding: 64px 16px; overflow: hidden; }
-.service-banner::before { content: ''; position: absolute; inset: 0; background-image: url('hero-image.jpeg'); background-size: cover; background-position: center; opacity: 0.25; z-index: 0; }
+.service-banner { position: relative; min-height: 400px; display: flex; align-items: center; padding: 64px 16px; overflow: hidden; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+.service-banner:hover { transform: translateY(-8px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.service-banner:hover::after { opacity: 0.7; }
+.service-banner::before { content: ''; position: absolute; inset: 0; background-image: url('hero-image.jpeg'); background-size: cover; background-position: center; opacity: 0.25; z-index: 0; transition: transform 0.3s ease; }
+.service-banner:hover::before { transform: scale(1.05); }
 .service-banner.provenance::before { background-image: url('provenance.jpeg'); opacity: 1; }
 .service-banner.acquisition::before { background-image: url('acquisition.jpeg'); opacity: 1; }
 .service-banner.field-investigation::before { background-image: url('field-investigation.jpeg'); opacity: 1; background-position: center 65%; }
-.service-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); z-index: 1; }
+.service-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); z-index: 1; transition: opacity 0.3s ease; }
 .service-banner.provenance::after { background: linear-gradient(135deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner.field-investigation::after { background: linear-gradient(135deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
@@ -100,7 +103,8 @@ body {
 .service-banner.right::after { background: linear-gradient(225deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); }
 .service-banner.right.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner-content { position: relative; z-index: 2; width: 90%; max-width: 800px; }
-.service-icon { font-size: 56px; margin-bottom: 20px; filter: grayscale(0.3) sepia(0.4); display: inline-block; }
+.service-icon { font-size: 56px; margin-bottom: 20px; filter: grayscale(0.3) sepia(0.4); display: inline-block; transition: transform 0.3s ease, filter 0.3s ease; }
+.service-banner:hover .service-icon { transform: scale(1.1); filter: grayscale(0) sepia(0.6); }
 .service-banner h3 { font-family: 'Cinzel', serif; font-size: 32px; margin: 0 0 16px; color: #3f352a; text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
 .service-banner p { margin: 0; color: #3f352a; line-height: 1.7; font-size: 17px; max-width: 680px; }
 .service-banner.provenance h3,
@@ -199,6 +203,26 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .case-study h2 { font-family: 'Cinzel', serif; font-size: 28px; }
 .case-study h3 { font-family: 'Cinzel', serif; font-size: 20px; }
 .case-study ul { color: #4a3b2a; }
+
+/* Service Detail Pages */
+.small-hero { min-height: 40vh; }
+.content-section { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
+.back-link { display: inline-block; color: #8b6f47; text-decoration: none; font-size: 16px; margin-bottom: 32px; transition: color 0.3s ease; }
+.back-link:hover { color: #3f352a; }
+.service-detail { max-width: 900px; margin: 0 auto; color: #3f352a; }
+.service-icon-large { font-size: 80px; margin-bottom: 24px; filter: grayscale(0.3) sepia(0.4); text-align: center; }
+.service-detail h2 { font-family: 'Cinzel', serif; font-size: 36px; text-align: center; margin: 0 0 32px; color: #3f352a; }
+.service-detail h3 { font-family: 'Cinzel', serif; font-size: 24px; margin: 40px 0 16px; color: #3f352a; }
+.service-detail p { line-height: 1.8; margin-bottom: 16px; font-size: 17px; }
+.service-detail .lead { font-size: 19px; font-style: italic; margin-bottom: 40px; text-align: center; color: #5a4a3a; }
+.service-list { margin: 16px 0 24px; padding-left: 24px; line-height: 1.8; }
+.service-list li { margin-bottom: 12px; color: #4a3b2a; }
+.service-list li strong { color: #3f352a; }
+.cta-section { background: rgba(255,252,245,0.6); padding: 40px; border-radius: 8px; margin-top: 56px; text-align: center; border: 1px solid rgba(139,111,71,0.2); }
+.cta-section h3 { margin-top: 0; font-size: 26px; }
+.cta-section p { margin-bottom: 24px; }
+.btn-primary { display: inline-block; background: #8b6f47; color: #fffef8; padding: 14px 32px; text-decoration: none; border-radius: 4px; font-size: 16px; font-weight: 500; transition: background 0.3s ease, transform 0.2s ease; }
+.btn-primary:hover { background: #6d563a; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
 
 /* Subtle parchment texture using CSS noise pattern fallback */
 body::before { content:""; position: fixed; inset: 0; pointer-events:none; background-image: radial-gradient(rgba(0,0,0,0.01) 1px, transparent 1px); background-size: 5px 5px; opacity: 0.35; mix-blend-mode:multiply; }
