@@ -203,6 +203,16 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 .case-study h3 { font-family: 'Cinzel', serif; font-size: 20px; }
 .case-study ul { color: #4a3b2a; }
 
+/* Case study imagery */
+.case-images { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 8px; }
+.case-figure { background: linear-gradient(180deg, #fff8ee, #fffaf6); border: 1px solid rgba(47,38,30,0.08); border-radius: 8px; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,0.08); }
+.case-figure img { display:block; width: 100%; height: auto; }
+.case-figure figcaption { padding: 10px 12px; font-size: 14px; color: #5a4a3a; line-height: 1.5; }
+
+@media(max-width: 760px) {
+  .case-images { grid-template-columns: 1fr; }
+}
+
 /* Service Detail Pages */
 .small-hero { min-height: 40vh; background-size: cover; background-position: center; }
 .content-section { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
