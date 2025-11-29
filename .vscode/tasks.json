@@ -18,7 +18,7 @@
         {
             "label": "Open Browser",
             "type": "shell",
-            "command": "sleep 2 && \"$BROWSER\" http://localhost:8000",
+            "command": "sleep 5 && \"$BROWSER\" http://localhost:8000",
             "isBackground": true,
             "problemMatcher": [],
             "presentation": {
