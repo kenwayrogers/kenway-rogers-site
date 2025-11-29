@@ -222,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
           else if (ev.key === 'Escape') { ev.preventDefault(); toggleMenu(false); mainBtn.focus(); }
         });
       });
-
       // reset preference behavior
       if (resetBtn) {
         resetBtn.setAttribute('role', 'menuitem');
@@ -255,5 +254,51 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = document.getElementById('caseStudies');
         if (el) smoothScrollTo(el, SCROLL_DURATION);
       }));
+  }
+
+  // Image Lightbox functionality
+  const lightboxLinks = document.querySelectorAll('.image-lightbox');
+  const lightboxOverlay = document.querySelector('.lightbox-overlay');
+  const lightboxImage = document.querySelector('.lightbox-image');
+  const lightboxCaption = document.querySelector('.lightbox-caption');
+
+  if (lightboxOverlay) {
+    // Open lightbox
+    lightboxLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const imageSrc = link.getAttribute('href');
+        const caption = link.getAttribute('data-caption') || '';
+        const altText = link.querySelector('img')?.getAttribute('alt') || '';
+        
+        lightboxImage.src = imageSrc;
+        lightboxImage.alt = altText;
+        lightboxCaption.textContent = caption;
+        lightboxOverlay.classList.add('active');
+        lightboxOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close lightbox
+    const closeLightbox = () => {
+      lightboxOverlay.classList.remove('active');
+      lightboxOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+    
+    // Close on overlay click (but not on image)
+    lightboxOverlay.addEventListener('click', (e) => {
+      if (e.target === lightboxOverlay) {
+        closeLightbox();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
   }
 });
