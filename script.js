@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navHeight = nav ? nav.offsetHeight : 0;
     const start = window.scrollY || window.pageYOffset;
     const rect = element.getBoundingClientRect();
-    const end = rect.top + start - navHeight - 12; // small spacing
+    const end = rect.top + start - navHeight; // position element right below nav
     const distance = end - start;
     let startTime = null;
 
@@ -30,20 +30,30 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(animation);
   }
 
-  // Scroll button - scroll to next section after hero
+  // Scroll button - scroll down exactly by hero height (nav is not fixed)
   if (scrollBtn) {
     scrollBtn.addEventListener('click', () => {
       const hero = document.querySelector('.hero');
       if (hero) {
-        // Get the next sibling element after the hero (should be main or first section)
-        let nextElement = hero.nextElementSibling;
-        // If next element is main, get its first child section
-        if (nextElement && nextElement.tagName === 'MAIN') {
-          nextElement = nextElement.firstElementChild;
+        const start = window.scrollY || window.pageYOffset;
+        // Scroll target: hero top + hero height (nav does not stay fixed)
+        const end = Math.max(0, Math.round(hero.offsetTop + hero.offsetHeight));
+        const distance = end - start;
+        let startTime = null;
+
+        function easeInOutQuad(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
         }
-        if (nextElement) {
-          smoothScrollTo(nextElement, SCROLL_DURATION);
+
+        function animation(currentTime) {
+          if (!startTime) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / SCROLL_DURATION, 1);
+          const eased = easeInOutQuad(progress);
+          window.scrollTo(0, Math.round(start + distance * eased));
+          if (timeElapsed < SCROLL_DURATION) requestAnimationFrame(animation);
         }
+        requestAnimationFrame(animation);
       }
     });
   }
