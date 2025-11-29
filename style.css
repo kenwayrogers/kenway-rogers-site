@@ -216,8 +216,34 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
 /* Service Detail Pages */
 .small-hero { min-height: 40vh; background-size: cover; background-position: center; }
 .content-section { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
-.back-link { display: inline-block; color: #8b6f47; text-decoration: none; font-size: 16px; margin-bottom: 32px; transition: color 0.3s ease; }
-.back-link:hover { color: #3f352a; }
+.back-link-wrap { 
+  text-align: center; 
+  margin: 56px 0 0; 
+  padding-top: 48px;
+  border-top: 1px solid rgba(139,111,71,0.15);
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  color: #6a5b4b;
+  background: linear-gradient(180deg, #fff8ee, #fffaf6);
+  border: 1px solid rgba(47,38,30,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.18s cubic-bezier(.2,.9,.2,1), box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.back-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.14);
+  background: linear-gradient(180deg, #fffaf6, #fffdf9);
+  color: #3f352a;
+}
+.back-link:focus { outline: 3px solid #e2c28a; outline-offset: 2px; }
 .service-detail { max-width: 900px; margin: 0 auto; color: #3f352a; }
 .service-icon-large { font-size: 80px; margin-bottom: 24px; filter: grayscale(0.3) sepia(0.4); text-align: center; }
 .service-detail h2 { font-family: 'Cinzel', serif; font-size: 36px; text-align: center; margin: 0 0 32px; color: #3f352a; }
