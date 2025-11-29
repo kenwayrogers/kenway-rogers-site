@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // initialize: no debug logs in production
   const scrollBtn = document.getElementById('scrollDown');
-  const target = document.getElementById('caseStudies');
   const heroBg = document.querySelector('.hero-bg');
 
   // global scroll duration (ms) — increase for a slower feel
@@ -31,8 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(animation);
   }
 
-  if (scrollBtn && target) {
-  scrollBtn.addEventListener('click', () => smoothScrollTo(target, SCROLL_DURATION));
+  // Scroll button - scroll to next section after hero
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', () => {
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        // Get the next sibling element after the hero (should be main or first section)
+        let nextElement = hero.nextElementSibling;
+        // If next element is main, get its first child section
+        if (nextElement && nextElement.tagName === 'MAIN') {
+          nextElement = nextElement.firstElementChild;
+        }
+        if (nextElement) {
+          smoothScrollTo(nextElement, SCROLL_DURATION);
+        }
+      }
+    });
   }
 
   // Parallax effect for hero background
