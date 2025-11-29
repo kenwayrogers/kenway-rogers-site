@@ -82,9 +82,9 @@ body {
 .scroll-indicator { animation: scroll-bounce 1.6s infinite; }
 
 /* Services Section */
-.services { padding: 72px 0 0; background: linear-gradient(180deg, #fdfcf9, #f9f6f0); }
-.services h2 { font-family: 'Cinzel', serif; font-size: 36px; text-align:center; margin: 8px 0 6px; color: #3f352a; padding: 0 16px; }
-.services .lead { text-align:center; margin: 10px auto 52px auto; max-width: 780px; color: #4a3b2a; opacity:0.95; padding: 0 16px; }
+.services { padding: 56px 0 0; background: linear-gradient(180deg, #e8dcc8, #e0d4bf); }
+.services h2 { font-family: 'Cinzel', serif; font-size: 32px; text-align:center; margin: 0 0 16px; color: #2b1f15; padding: 0 16px; font-weight: 700; letter-spacing: 0.5px; }
+.services .lead { text-align:center; margin: 0 auto 48px auto; max-width: 680px; color: #3f2f20; opacity:0.88; padding: 0 16px; font-size: 18px; line-height: 1.6; }
 .services-banners { display: flex; flex-direction: column; }
 .service-banner { position: relative; min-height: 400px; display: flex; align-items: center; padding: 64px 16px; overflow: hidden; text-decoration: none; cursor: pointer; }
 .service-banner:hover::after { opacity: 0.6; }
@@ -112,6 +112,65 @@ body {
 .service-banner.acquisition p { color: #fffef8; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
 .service-banner.field-investigation h3,
 .service-banner.field-investigation p { color: #fffef8; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+
+/* Contact CTA Section */
+.contact-cta {
+  padding: 64px 16px;
+  background: linear-gradient(180deg, #f9f6f0, #ede4d4);
+  border-top: 1px solid rgba(139,111,71,0.12);
+  border-bottom: 1px solid rgba(139,111,71,0.12);
+}
+.contact-cta-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contact-cta h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  margin: 0 0 12px;
+  color: #3f352a;
+}
+.contact-cta p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #5a4a3a;
+  margin: 0 0 28px;
+}
+.btn-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(180deg, #8b6f47, #6d563a);
+  color: #fffef8;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Crimson Text', Georgia, serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.18s cubic-bezier(.2,.9,.2,1), box-shadow 0.18s ease, background 0.18s ease;
+}
+.btn-contact::after {
+  content: '✉';
+  font-size: 18px;
+  opacity: 0.9;
+}
+.btn-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  background: linear-gradient(180deg, #9a7d52, #7a614a);
+}
+.btn-contact:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.btn-contact:focus {
+  outline: 3px solid #e2c28a;
+  outline-offset: 2px;
+}
 
 /* Case Studies */
 .case-studies { padding: 72px 16px; background: linear-gradient(180deg, rgba(238,230,216,0.9), rgba(238,230,216,0.98)); }
