@@ -11,11 +11,11 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet"></noscript>
 <script defer src="script.js"></script>
 
-  <title>About — Kenway Rogers</title>
-  <meta name="description" content="Artifact investigator specializing in provenance research, authentication, and field work." />
+  <title>About Kenway</title>
+  <meta name="description" content="About Kenway Rogers — treasure hunter and curator of lost artifacts." />
   <meta property="og:type" content="profile" />
-  <meta property="og:title" content="About — Kenway Rogers" />
-  <meta property="og:description" content="Artifact investigation through archival research and field work." />
+  <meta property="og:title" content="About Kenway Rogers" />
+  <meta property="og:description" content="Kenway Rogers finds what was lost and tells its story through fieldwork and research." />
   <meta property="og:image" content="/images-optimized/hero-image.jpeg" />
   <meta name="twitter:card" content="summary" />
   <link rel="canonical" href="/about.html" />
@@ -23,12 +23,7 @@
 <body>
   <nav class="site-nav">
   <div class="nav-inner">
-    <a class="logo" href="index.html">
-      <picture>
-        <source srcset="KR-logo-gold-optimized.webp" type="image/webp">
-        <img src="KR-logo-gold-optimized.png" alt="KR" style="height: 48px; width: auto; display: block;">
-      </picture>
-    </a>
+    <a class="logo" href="index.html">KR</a>
     <ul>
       <li><a href="index.html">Home</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>
@@ -38,15 +33,12 @@
 
 
   <div class="about-container">
-    <h1>About</h1>
+    <h1>About Kenway Rogers</h1>
     <p>
-      I trace artifacts—books, manuscripts, objects with gaps in their history or questions hanging over their authenticity. It's detective work, really, just with older clues and dustier evidence.
-    </p>
-    <p>
-      The work takes me through archives (national libraries, municipal records, auction house databases), and sometimes means getting on a plane when the trail leads somewhere that requires showing up in person. A lead in Vienna, a dealer in Istanbul, an estate sale outside Edinburgh. Most investigations wrap up in a few weeks, though some have stayed open for months, waiting for the right piece of information to surface.
-    </p>
-    <p>
-      I'm based in the UK, work globally, and prefer email for initial contact. If you've got something that needs investigating, send over photos and whatever documentation you have—provenance records, receipts, family stories, anything that adds context. I'll take a look and let you know what's possible.
+      Some say he's a collector. Others say a decipherer of forgotten things.
+      Kenway walks the quiet places of history — the drawers, the attics, the
+      markets where time pools like dust. He finds what was lost, and tells
+      the story no one else could see.
     </p>
     <div class="email-menu-wrapper">
       <button type="button" class="cta email-main" aria-haspopup="true" aria-expanded="false">Send Email</button>
@@ -74,10 +66,16 @@
   <button class="modal-close" aria-label="Close contact dialog">✕</button>
   <div class="modal-inner">
     <h2 id="contactTitle">Contact Kenway</h2>
-    <p>Send a message about your find or inquiry.</p>
+    <p>Tell Kenway about your find or an enquiry — he will respond to the email you provide.</p>
     <form name="contact" id="contactForm">
+      <label for="visitorEmail">Your Email</label>
+      <input id="visitorEmail" name="email" type="email" required placeholder="you@example.com" />
+
+      <label for="visitorName">Your Name (optional)</label>
+      <input id="visitorName" name="name" type="text" placeholder="Your name" />
+
       <label for="visitorMessage">Message</label>
-      <textarea id="visitorMessage" name="message" rows="8" required placeholder="Tell me about the artifact, your question, or what you need investigated..."></textarea>
+      <textarea id="visitorMessage" name="message" rows="5" required placeholder="Tell me about the artifact, your question, or how I can help..."></textarea>
 
       <div class="form-actions">
         <div class="email-menu-wrapper">
