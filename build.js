@@ -36,7 +36,8 @@ if (OPTIMIZED) {
 // Navigation configurations for different pages
 const navConfigs = {
   home: `<li><a href="#caseStudies">Case Studies</a></li>
-        <li><a href="about.html">About</a></li>`,
+        <li><a href="about.html">About</a></li>
+        <li><a href="#" class="contact-open">Contact</a></li>`,
   
   about: `<li><a href="index.html">Home</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
