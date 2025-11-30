@@ -1,3 +1,59 @@
+# Build System
+
+This site uses a simple Node.js build system to reduce code duplication.
+
+## Directory Structure
+
+```
+src/
+  partials/       # Reusable HTML components (nav, footer, modal, etc.)
+  pages/          # Page templates (use {{PLACEHOLDER}} syntax)
+*.html            # Built output files (generated, don't edit directly)
+```
+
+## Usage
+
+### First time setup
+```bash
+npm install  # (No dependencies needed, uses built-in Node.js)
+```
+
+### Build all pages
+```bash
+npm run build
+```
+
+### Development with auto-rebuild
+```bash
+npm run watch
+```
+
+### Build and serve
+```bash
+npm run dev
+```
+
+## How it works
+
+1. Edit files in `src/pages/` - these are your page templates
+2. Use placeholders like `{{NAV}}`, `{{FOOTER}}`, `{{CONTACT_MODAL}}`, `{{HEAD_COMMON}}`
+3. Run `npm run build` to generate the final HTML files in the root directory
+4. The build system automatically injects the correct navigation based on the filename
+
+## Placeholders
+
+- `{{HEAD_COMMON}}` - Common meta tags, CSS, fonts
+- `{{NAV}}` - Navigation bar (auto-configured per page)
+- `{{FOOTER}}` - Site footer
+- `{{CONTACT_MODAL}}` - Contact form modal
+
+## Migration
+
+To migrate existing pages:
+1. Move HTML file to `src/pages/`
+2. Replace common sections with placeholders
+3. Run `npm run build`
+4. Check the generated file in the root directory
 # kenway-rogers-site
 Website for Kenway Rogers
 

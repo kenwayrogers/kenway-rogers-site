@@ -18,17 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <nav class="site-nav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html">KR</a>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#" class="contact-open">Contact</a></li>
-    </ul>
-  </div>
-</nav>
-
+  {{NAV}}
   <header class="hero" style="min-height: 320px;">
     <div class="hero-bg" style="background-image: url('hero-image.jpeg')"></div>
     <div class="hero-overlay"></div>
@@ -57,47 +47,8 @@
       <p class="case-back-wrap"><a class="back-link case-back" href="index.html" aria-label="Back to Case Studies">← Back to Case Studies</a></p>
     </article>
   </main>
-  <footer>
-  <div class="container foot-inner">
-    <small>© 2025 Kenway Rogers — All rights reserved</small>
-    <nav class="footer-nav">
-      <a href="about.html">About</a>
-      <a href="#" class="contact-open">Contact</a>
-    </nav>
-  </div>
-</footer>
-
-  <!-- Contact Modal -->
-<div class="modal-overlay" aria-hidden="true"></div>
-<div class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="contactTitle" id="contactModal">
-  <button class="modal-close" aria-label="Close contact dialog">✕</button>
-  <div class="modal-inner">
-    <h2 id="contactTitle">Contact Kenway</h2>
-    <p>Tell Kenway about your find or an enquiry — he will respond to the email you provide.</p>
-    <form name="contact" id="contactForm">
-      <label for="visitorEmail">Your Email</label>
-      <input id="visitorEmail" name="email" type="email" required placeholder="you@example.com" />
-
-      <label for="visitorName">Your Name (optional)</label>
-      <input id="visitorName" name="name" type="text" placeholder="Your name" />
-
-      <label for="visitorMessage">Message</label>
-      <textarea id="visitorMessage" name="message" rows="5" required placeholder="Tell me about the artifact, your question, or how I can help..."></textarea>
-
-      <div class="form-actions">
-        <div class="email-menu-wrapper">
-          <button type="button" class="cta email-main" aria-haspopup="true" aria-expanded="false">Send Email</button>
-          <div class="email-options" role="menu" aria-hidden="true">
-            <button type="button" class="email-option" data-kind="gmail">Gmail (web)</button>
-            <button type="button" class="email-option" data-kind="other">Other (mail client)</button>
-            <button type="button" class="email-reset" data-kind="reset">Reset preference</button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
+  {{FOOTER}}
+  {{CONTACT_MODAL}}
         </div>
       </form>
     </div>
