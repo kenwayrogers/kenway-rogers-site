@@ -1,4 +1,4 @@
-import { easeInOutQuad, smoothScrollTo } from './utils.js';
+import { easeInOutQuad, smoothScrollTo, throttle } from './utils.js';
 
 const SCROLL_DURATION = 1800;
 
@@ -31,11 +31,11 @@ export function initScrollButton() {
 
 // Initialize parallax and card reveal effects
 export function initScrollEffects() {
-  const heroBg = document.querySelector('.hero-bg');
+  const heroBgImg = document.querySelector('.hero-bg-img');
   
   const onScroll = () => {
     const scrolled = window.scrollY;
-    if (heroBg) heroBg.style.transform = `translateY(${scrolled * 0.2}px)`;
+    if (heroBgImg) heroBgImg.style.transform = `translateY(${scrolled * 0.2}px)`;
     
     // Simple reveal for cards
     const cards = document.querySelectorAll('.card');
@@ -45,7 +45,7 @@ export function initScrollEffects() {
     }
   };
   
-  window.addEventListener('scroll', onScroll);
+  window.addEventListener('scroll', throttle(onScroll, 16), { passive: true });
   onScroll(); // Initial call to reveal any cards on load
 }
 

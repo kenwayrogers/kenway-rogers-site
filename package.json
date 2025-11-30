@@ -4,8 +4,9 @@
   "description": "Kenway Rogers treasure hunter website",
   "scripts": {
     "build": "node build.js",
-    "build:optimized": "node optimize.js && node build.js --optimized",
     "build:js": "node bundle-js.js",
+    "build:all": "npm run build:js && npm run build",
+    "build:optimized": "node optimize.js && node build.js --optimized",
     "optimize": "node optimize.js",
     "optimize:images": "node optimize-images.js",
     "dev": "npm run build:js && npm run build && python3 -m http.server 8000",

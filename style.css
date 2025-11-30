@@ -18,14 +18,6 @@ body {
   color: #fff;
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  z-index: 0;
-}
-
 /* WebP picture element support for hero backgrounds */
 .hero-bg-picture {
   position: absolute;
@@ -38,6 +30,7 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  will-change: transform;
 }
 
 .hero-overlay {
@@ -176,8 +169,17 @@ body {
 .card-body p { margin: 0; color: #524232; line-height: 1.45; }
 
 /* In-view animation for cards */
-.card { opacity: 0; transform: translateY(12px); transition: transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms ease; }
-.card.in-view { opacity: 1; transform: translateY(0); }
+.card { 
+  opacity: 0; 
+  transform: translateY(12px); 
+  transition: transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms ease;
+  will-change: transform, opacity;
+}
+.card.in-view { 
+  opacity: 1; 
+  transform: translateY(0); 
+  will-change: auto;
+}
 
 /* Navigation */
 .site-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 12; background: transparent; }

@@ -7,5 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initSmoothAnchors();
   initContactModal();
-  initLightbox();
+  const lightbox = initLightbox();
+  
+  // Consolidated Escape key handler
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+      // Close lightbox if active
+      if (lightbox && document.querySelector('.lightbox-overlay.active')) {
+        lightbox.closeLightbox();
+      }
+    }
+  });
 });

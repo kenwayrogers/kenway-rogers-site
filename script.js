@@ -10,6 +10,18 @@ function easeInOutQuad(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
+// Throttle function for performance
+function throttle(func, wait) {
+  let waiting = false;
+  return function(...args) {
+    if (!waiting) {
+      func.apply(this, args);
+      waiting = true;
+      setTimeout(() => { waiting = false; }, wait);
+    }
+  };
+}
+
 // Custom smooth scroll function with configurable duration
 function smoothScrollTo(element, duration = 1800) {
   const nav = document.querySelector('.site-nav');
@@ -65,11 +77,11 @@ function initScrollButton() {
 
 // Initialize parallax and card reveal effects
 function initScrollEffects() {
-  const heroBg = document.querySelector('.hero-bg');
+  const heroBgImg = document.querySelector('.hero-bg-img');
   
   const onScroll = () => {
     const scrolled = window.scrollY;
-    if (heroBg) heroBg.style.transform = `translateY(${scrolled * 0.2}px)`;
+    if (heroBgImg) heroBgImg.style.transform = `translateY(${scrolled * 0.2}px)`;
     
     // Simple reveal for cards
     const cards = document.querySelectorAll('.card');
@@ -79,7 +91,7 @@ function initScrollEffects() {
     }
   };
   
-  window.addEventListener('scroll', onScroll);
+  window.addEventListener('scroll', throttle(onScroll, 16), { passive: true });
   onScroll(); // Initial call to reveal any cards on load
 }
 
@@ -130,9 +142,12 @@ function initContactModal() {
   
   if (overlay) overlay.addEventListener('click', closeModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keyup', (e) => { 
-    if (e.key === 'Escape') closeModal(); 
-  });
+  
+  // Handle Escape key for modal
+  const handleEscape = (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  };
+  document.addEventListener('keyup', handleEscape);
 
   if (form) initContactForm(form, closeModal);
 }
@@ -222,11 +237,6 @@ function initEmailMenu(form, closeModal) {
     // Close on outside click
     document.addEventListener('click', (ev) => { 
       if (!wrapper.contains(ev.target)) toggleMenu(false); 
-    });
-    
-    // Escape to close
-    document.addEventListener('keyup', (ev) => { 
-      if (ev.key === 'Escape') toggleMenu(false); 
     });
 
     // Option button behaviors
@@ -367,12 +377,8 @@ function initLightbox() {
     }
   });
 
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
-      closeLightbox();
-    }
-  });
+  // Close lightbox on Escape (exported for use in modal.js)
+  return { closeLightbox };
 }
 
 
@@ -383,7 +389,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initSmoothAnchors();
   initContactModal();
-  initLightbox();
+  const lightbox = initLightbox();
+  
+  // Consolidated Escape key handler
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'Escape') {
+      // Close lightbox if active
+      if (lightbox && document.querySelector('.lightbox-overlay.active')) {
+        lightbox.closeLightbox();
+      }
+    }
+  });
 });
 
 })();

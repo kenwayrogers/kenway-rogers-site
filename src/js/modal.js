@@ -31,9 +31,12 @@ export function initContactModal() {
   
   if (overlay) overlay.addEventListener('click', closeModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  document.addEventListener('keyup', (e) => { 
-    if (e.key === 'Escape') closeModal(); 
-  });
+  
+  // Handle Escape key for modal
+  const handleEscape = (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  };
+  document.addEventListener('keyup', handleEscape);
 
   if (form) initContactForm(form, closeModal);
 }
@@ -123,11 +126,6 @@ function initEmailMenu(form, closeModal) {
     // Close on outside click
     document.addEventListener('click', (ev) => { 
       if (!wrapper.contains(ev.target)) toggleMenu(false); 
-    });
-    
-    // Escape to close
-    document.addEventListener('keyup', (ev) => { 
-      if (ev.key === 'Escape') toggleMenu(false); 
     });
 
     // Option button behaviors

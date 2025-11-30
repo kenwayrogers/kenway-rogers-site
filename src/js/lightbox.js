@@ -37,10 +37,6 @@ export function initLightbox() {
     }
   });
 
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightboxOverlay.classList.contains('active')) {
-      closeLightbox();
-    }
-  });
+  // Close lightbox on Escape (exported for use in modal.js)
+  return { closeLightbox };
 }

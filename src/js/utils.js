@@ -3,6 +3,18 @@ export function easeInOutQuad(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
+// Throttle function for performance
+export function throttle(func, wait) {
+  let waiting = false;
+  return function(...args) {
+    if (!waiting) {
+      func.apply(this, args);
+      waiting = true;
+      setTimeout(() => { waiting = false; }, wait);
+    }
+  };
+}
+
 // Custom smooth scroll function with configurable duration
 export function smoothScrollTo(element, duration = 1800) {
   const nav = document.querySelector('.site-nav');
