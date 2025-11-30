@@ -63,30 +63,7 @@ body {
 .hero-title { font-family: 'Cinzel', serif; font-size: clamp(32px, 6vw, 64px); margin: 0 0 8px; color: #fff; text-shadow: 0 3px 18px rgba(0,0,0,0.48); }
 .hero-sub { font-size: clamp(14px, 2.2vw, 20px); color: rgba(255,255,255,0.92); margin: 10px 0 18px; }
 
-/* CTA wooden plank */
-.hero .cta {
-  background: none;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 auto;
-  position: relative;
-  outline: none;
-}
-.hero .cta:focus { outline: 3px solid #e2c28a; outline-offset: 2px; }
-.hero .cta:hover img { transform: scale(1.03) rotate(-1deg); filter: brightness(1.08) drop-shadow(0 2px 12px #0002); }
-.hero .cta:active img { transform: scale(0.98) rotate(0deg); filter: brightness(0.97); }
-  /* Add subtle grain on top of the texture to keep readability */
-.hero .cta::before,
-.hero .cta::after { display: none; }
-.hero .cta:hover img { transform: translateY(-6px) rotate(-1deg) scale(1.01); }
-.hero .cta:active img { transform: translateY(-1px) rotate(0deg); }
-.hero .cta:focus { outline: none; }
 
-/* Make CTA images responsive and apply transition */
-.hero .cta img { display:block; max-width: 420px; width: 32vw; height: auto; margin: 0 auto; transition: transform 0.13s cubic-bezier(.2,.9,.2,1), filter 0.13s; }
 
 .scroll-indicator { position: absolute; left: 50%; transform: translateX(-50%); bottom: 28px; background: rgba(255,255,255,0.06); color: #efe6d8; border-radius: 40px; padding: 8px 14px; border: 1px solid rgba(255,255,255,0.04); cursor:pointer; display:inline-flex; gap:8px; align-items:center; font-weight:700; backdrop-filter: blur(6px); }
 .scroll-indicator { z-index: 3; }
@@ -202,6 +179,14 @@ body {
 .card { opacity: 0; transform: translateY(12px); transition: transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms ease; }
 .card.in-view { opacity: 1; transform: translateY(0); }
 
+/* Navigation */
+.site-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 12; background: transparent; }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 18px 28px; display:flex; align-items:center; justify-content:space-between; gap: 12px; }
+.nav-inner .logo { font-family: 'Cinzel', serif; font-weight: 900; letter-spacing: 1px; font-size: 20px; text-decoration: none; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.nav-inner ul { list-style: none; display:flex; gap: 18px; margin: 0; padding: 0; align-items:center; }
+.nav-inner ul li { margin: 0; }
+.nav-inner ul li a { text-decoration:none; color: #fff; font-weight:600; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+
 /* Footer */
 footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background: linear-gradient(180deg, rgba(16,12,10,0.03), rgba(6,4,3,0.01)); }
 .foot-inner { display:flex; align-items:center; justify-content:space-between; gap: 16px; color:#5b4a3a; }
@@ -243,31 +228,13 @@ footer { border-top: 1px solid rgba(0,0,0,0.03); padding: 32px 16px; background:
   .modal { max-width: 95%; padding: 14px; }
 }
 
-/* Responsive tweaks */
 @media(max-width: 760px) {
   .hero-inner { flex-direction: column; gap: 12px; text-align:center; padding-top: 70px; }
   .nav-inner { padding: 12px 18px; }
   .nav-inner a { font-size: 14px; }
-  /* tool-icon removed */
   .hero-sub { font-size: 16px; }
   .foot-inner { flex-direction: column; text-align:center; gap:8px; }
 }
-
-/* Ensure top nav sits above hero overlay */
-.site-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 12; background: transparent; }
-
-/* Top navigation layout */
-.nav-inner { max-width: 1200px; margin: 0 auto; padding: 18px 28px; display:flex; align-items:center; justify-content:space-between; gap: 12px; }
-.nav-inner .logo { font-family: 'Cinzel', serif; font-weight: 900; letter-spacing: 1px; font-size: 20px; text-decoration: none; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-.nav-inner ul { list-style: none; display:flex; gap: 18px; margin: 0; padding: 0; align-items:center; }
-.nav-inner ul li { margin: 0; }
-.nav-inner ul li a { text-decoration:none; color: #fff; font-weight:600; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-
-/* Hero no longer needs top padding since nav is absolute */
-.hero { padding-top: 0; }
-
-/* CTA text contrast tweak — lighten text for better legibility on dark/warm wooden signs */
-/* .hero .cta .cta-text removed - using a CTA image now */
 
 /* About and Article */
 .about-container { max-width:900px; margin: 120px auto 40px; padding: 0 24px; color: #3f352a; }
