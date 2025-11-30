@@ -307,12 +307,8 @@ function initLightbox() {
     document.body.style.overflow = '';
   };
   
-  // Close on overlay click (but not on image)
-  lightboxOverlay.addEventListener('click', (e) => {
-    if (e.target === lightboxOverlay) {
-      closeLightbox();
-    }
-  });
+  // Close on any click anywhere in the lightbox
+  lightboxOverlay.addEventListener('click', closeLightbox);
 
   // Close lightbox on Escape (exported for use in modal.js)
   return { closeLightbox };

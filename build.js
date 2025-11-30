@@ -35,20 +35,20 @@ if (OPTIMIZED) {
 
 // Navigation configurations for different pages
 const navConfigs = {
-  home: `<li><a href="#caseStudies">Case Studies</a></li>
-        <li><a href="about.html">About</a></li>
+  home: `<li><a href="/#caseStudies">Case Studies</a></li>
+        <li><a href="/about/">About</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
   
-  about: `<li><a href="index.html">Home</a></li>
+  about: `<li><a href="/">Home</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
   
-  services: `<li><a href="index.html#services">Services</a></li>
-        <li><a href="index.html#caseStudies">Case Studies</a></li>
-        <li><a href="about.html">About</a></li>
+  services: `<li><a href="/#services">Services</a></li>
+        <li><a href="/#caseStudies">Case Studies</a></li>
+        <li><a href="/about/">About</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
   
-  case: `<li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
+  case: `<li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`
 };
 
@@ -83,7 +83,25 @@ function processTemplate(content, config = {}) {
   return result;
 }
 
-// Build all pages from src/pages/*.html
+// Recursively find all HTML files in a directory
+function findHTMLFiles(dir, fileList = []) {
+  const files = fs.readdirSync(dir);
+  
+  files.forEach(file => {
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    
+    if (stat.isDirectory()) {
+      findHTMLFiles(filePath, fileList);
+    } else if (file.endsWith('.html')) {
+      fileList.push(filePath);
+    }
+  });
+  
+  return fileList;
+}
+
+// Build all pages from src/pages/**/*.html
 function buildPages() {
   console.log('🔨 Building pages...');
   
@@ -94,30 +112,43 @@ function buildPages() {
     return;
   }
 
-  const pageFiles = fs.readdirSync(PAGES_DIR).filter(f => f.endsWith('.html'));
+  const pageFiles = findHTMLFiles(PAGES_DIR);
   
   if (pageFiles.length === 0) {
     console.log('⚠️  No HTML files found in src/pages/');
     return;
   }
 
-  pageFiles.forEach(file => {
-    const content = fs.readFileSync(path.join(PAGES_DIR, file), 'utf8');
+  pageFiles.forEach(filePath => {
+    const content = fs.readFileSync(filePath, 'utf8');
     
-    // Determine nav type from filename
+    // Get relative path from PAGES_DIR
+    const relativePath = path.relative(PAGES_DIR, filePath);
+    const fileName = path.basename(filePath);
+    
+    // Determine nav type from path
     let navType = 'home';
-    if (file.includes('about')) navType = 'about';
-    else if (file.includes('case')) navType = 'case';
-    else if (file.includes('provenance') || file.includes('acquisition') || file.includes('field-investigation')) {
+    if (relativePath.includes('about')) navType = 'about';
+    else if (relativePath.includes('case')) navType = 'case';
+    else if (relativePath.includes('provenance') || relativePath.includes('acquisition') || relativePath.includes('field-investigation')) {
       navType = 'services';
     }
     
     const processed = processTemplate(content, { navType });
     
-    // Write to dist (root directory for now)
-    const outputPath = path.join(DIST_DIR, file);
+    // Determine output path maintaining directory structure
+    const outputPath = relativePath === fileName 
+      ? path.join(DIST_DIR, fileName)
+      : path.join(DIST_DIR, path.dirname(relativePath), fileName);
+    
+    // Create output directory if needed
+    const outputDir = path.dirname(outputPath);
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true });
+    }
+    
     fs.writeFileSync(outputPath, processed);
-    console.log(`✅ Built ${file}`);
+    console.log(`✅ Built ${relativePath}`);
   });
   
   console.log('✨ Build complete!');
