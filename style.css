@@ -33,6 +33,16 @@ body {
   will-change: transform;
 }
 
+/* Fallback for hero backgrounds using background-image */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
