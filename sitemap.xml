@@ -16,8 +16,4 @@
     <loc>/case3.html</loc>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>/about.html</loc>
-    <priority>0.50</priority>
-  </url>
 </urlset>

@@ -3,7 +3,6 @@ node_modules/
 *.log
 .env
 backup-original/
-about-new.html
 components.js
 migrate.js
 CLEANUP-SUMMARY.md

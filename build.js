@@ -36,19 +36,13 @@ if (OPTIMIZED) {
 // Navigation configurations for different pages
 const navConfigs = {
   home: `<li><a href="/#caseStudies">Case Studies</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="#" class="contact-open">Contact</a></li>`,
-  
-  about: `<li><a href="/">Home</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
   
   services: `<li><a href="/#services">Services</a></li>
         <li><a href="/#caseStudies">Case Studies</a></li>
-        <li><a href="/about/">About</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`,
   
   case: `<li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
         <li><a href="#" class="contact-open">Contact</a></li>`
 };
 
@@ -128,8 +122,7 @@ function buildPages() {
     
     // Determine nav type from path
     let navType = 'home';
-    if (relativePath.includes('about')) navType = 'about';
-    else if (relativePath.includes('case')) navType = 'case';
+    if (relativePath.includes('case')) navType = 'case';
     else if (relativePath.includes('provenance') || relativePath.includes('acquisition') || relativePath.includes('field-investigation')) {
       navType = 'services';
     }
