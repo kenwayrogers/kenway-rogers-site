@@ -26,6 +26,20 @@ body {
   z-index: 0;
 }
 
+/* WebP picture element support for hero backgrounds */
+.hero-bg-picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -88,11 +102,11 @@ body {
 .services-banners { display: flex; flex-direction: column; }
 .service-banner { position: relative; min-height: 400px; display: flex; align-items: center; padding: 64px 16px; overflow: hidden; text-decoration: none; cursor: pointer; }
 .service-banner:hover::after { opacity: 0.6; }
-.service-banner::before { content: ''; position: absolute; inset: 0; background-image: url('hero-image.jpeg'); background-size: cover; background-position: center; opacity: 0.25; z-index: 0; transition: transform 0.5s ease, filter 0.3s ease; }
+.service-banner::before { content: ''; position: absolute; inset: 0; background-image: url('images-optimized/hero-image.jpeg'); background-size: cover; background-position: center; opacity: 0.25; z-index: 0; transition: transform 0.5s ease, filter 0.3s ease; }
 .service-banner:hover::before { transform: scale(1.08); filter: brightness(1.1); }
-.service-banner.provenance::before { background-image: url('provenance.jpeg'); opacity: 1; }
-.service-banner.acquisition::before { background-image: url('acquisition.jpeg'); opacity: 1; }
-.service-banner.field-investigation::before { background-image: url('field-investigation.jpeg'); opacity: 1; background-position: center 65%; }
+.service-banner.provenance::before { background-image: url('images-optimized/provenance.jpeg'); opacity: 1; }
+.service-banner.acquisition::before { background-image: url('images-optimized/acquisition.jpeg'); opacity: 1; }
+.service-banner.field-investigation::before { background-image: url('images-optimized/field-investigation.jpeg'); opacity: 1; background-position: center 65%; }
 .service-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,252,245,0.85), rgba(250,245,235,0.9)); z-index: 1; transition: opacity 0.3s ease; }
 .service-banner.provenance::after { background: linear-gradient(135deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }
 .service-banner.acquisition::after { background: linear-gradient(225deg, rgba(255,252,245,0), rgba(250,245,235,0.05)); }

@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kenway Rogers — Treasure Hunter</title>
-  <link rel="icon" type="image/png" href="KR-logo.png" />
+  <link rel="icon" type="image/png" href="images-optimized/KR-logo.png" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,12 +16,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Kenway Rogers — Treasure Hunter" />
   <meta property="og:description" content="Rustic D&D-flavoured treasure hunting, artifact recovery, and provenance investigations." />
-  <meta property="og:image" content="/hero-image.jpeg" />
+  <meta property="og:image" content="/images-optimized/hero-image.jpeg" />
   <meta property="og:url" content="/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Kenway Rogers — Treasure Hunter" />
   <meta name="twitter:description" content="Rustic D&D-flavoured treasure hunting and artifact investigations." />
-  <meta name="twitter:image" content="/hero-image.jpeg" />
+  <meta name="twitter:image" content="/images-optimized/hero-image.jpeg" />
   <link rel="canonical" href="/" />
 </head>
 <body>
@@ -38,7 +38,11 @@
 
   <!-- CINEMATIC HERO -->
   <header class="hero" role="banner" id="home">
-    <div class="hero-bg" style="background-image: url('hero-image.jpeg')"></div>
+    <picture class="hero-bg-picture">
+      <source srcset="images-optimized/hero-image.webp" type="image/webp">
+      <img src="images-optimized/hero-image.jpeg" alt="" class="hero-bg-img">
+    </picture>
+    <div class="hero-bg" style="background-image: url('images-optimized/hero-image.jpeg')"></div>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <!-- hero-tools removed for cleaner layout -->
@@ -109,14 +113,14 @@
             </div>
           </a>
           <a class="card" href="case2.html">
-            <div class="card-visual" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.4)), url('hero-image.jpeg')"></div>
+            <div class="card-visual" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.4)), url('images-optimized/hero-image.jpeg')"></div>
             <div class="card-body">
               <h3>The Emerald Ledger</h3>
               <p>A coded ledger from a caravan rumored to have traded rare gemstones; deciphering a map within.</p>
             </div>
           </a>
           <a class="card" href="case3.html">
-            <div class="card-visual" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.4)), url('hero-image.jpeg')"></div>
+            <div class="card-visual" style="background-image: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.4)), url('images-optimized/hero-image.jpeg')"></div>
             <div class="card-body">
               <h3>Steel of the Highlands</h3>
               <p>Tracing the provenance and cultural significance of a ceremonial blade recovered from ruins.</p>

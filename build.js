@@ -9,6 +9,10 @@ const PARTIALS_DIR = path.join(SRC_DIR, 'partials');
 const PAGES_DIR = path.join(SRC_DIR, 'pages');
 const DIST_DIR = __dirname; // Build to root for now
 
+// Check if optimized mode
+const args = process.argv.slice(2);
+const OPTIMIZED = args.includes('--optimized');
+
 // Read partial files
 const partials = {
   nav: fs.readFileSync(path.join(PARTIALS_DIR, 'nav.html'), 'utf8'),
@@ -16,6 +20,18 @@ const partials = {
   contactModal: fs.readFileSync(path.join(PARTIALS_DIR, 'contact-modal.html'), 'utf8'),
   headCommon: fs.readFileSync(path.join(PARTIALS_DIR, 'head-common.html'), 'utf8')
 };
+
+// Load optimized assets if available
+let criticalCSS = '';
+let fontLoadingSnippet = '';
+if (OPTIMIZED) {
+  try {
+    criticalCSS = fs.readFileSync(path.join(DIST_DIR, 'critical.min.css'), 'utf8');
+    fontLoadingSnippet = fs.readFileSync(path.join(DIST_DIR, 'font-loading.html'), 'utf8');
+  } catch (e) {
+    console.warn('⚠️  Optimized assets not found. Run "npm run optimize" first.');
+  }
+}
 
 // Navigation configurations for different pages
 const navConfigs = {
@@ -47,7 +63,21 @@ function processTemplate(content, config = {}) {
   result = result.replace('{{NAV}}', nav);
   result = result.replace('{{FOOTER}}', partials.footer);
   result = result.replace('{{CONTACT_MODAL}}', partials.contactModal);
-  result = result.replace('{{HEAD_COMMON}}', partials.headCommon);
+  
+  // Handle optimized vs normal head
+  if (OPTIMIZED && criticalCSS) {
+    const optimizedHead = partials.headCommon
+      .replace('href="style.css"', 'href="style.min.css"')
+      .replace('src="script.js"', 'src="script.min.js"')
+      .replace(/<link rel="preconnect"[\s\S]*?rel="stylesheet">/, fontLoadingSnippet);
+    
+    result = result.replace('{{HEAD_COMMON}}', optimizedHead);
+    
+    // Inject critical CSS inline
+    result = result.replace('</head>', `<style>${criticalCSS}</style>\n</head>`);
+  } else {
+    result = result.replace('{{HEAD_COMMON}}', partials.headCommon);
+  }
   
   return result;
 }
@@ -111,9 +141,12 @@ function watch() {
 }
 
 // Main
-const args = process.argv.slice(2);
 buildPages();
 
 if (args.includes('--watch') || args.includes('-w')) {
   watch();
+}
+
+if (OPTIMIZED) {
+  console.log('🚀 Built with optimizations enabled!');
 }

@@ -8,3 +8,11 @@ components.js
 migrate.js
 CLEANUP-SUMMARY.md
 BUILD.md
+style.min.css
+script.min.js
+critical.min.css
+font-loading.html
+picture-elements.html
+optimize.js
+optimize-images.js
+PERFORMANCE.md
