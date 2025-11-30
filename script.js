@@ -109,11 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const data = new FormData(form);
-      const email = data.get('email') || '';
-      const name = data.get('name') || '';
       const message = data.get('message') || '';
-      const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
-      const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+      const subject = 'Contact from KenwayRogers.com';
+      const body = message;
       const mailto = `mailto:kenwayrogers@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
       setTimeout(closeModal, 500);
@@ -160,11 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
           const choice = savedNow;
           // 'gmail' opens compose in a new tab
           const data = new FormData(form);
-          const email = data.get('email') || '';
-          const name = data.get('name') || '';
           const message = data.get('message') || '';
-          const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
-          const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+          const subject = 'Contact from KenwayRogers.com';
+          const body = message;
           if (choice === 'gmail') {
             const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.open(gmailUrl, '_blank', 'noopener');
@@ -193,11 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ev.preventDefault();
           const kind = btn.dataset.kind || 'gmail';
         const data = new FormData(form);
-        const email = data.get('email') || '';
-        const name = data.get('name') || '';
         const message = data.get('message') || '';
-        const subject = name ? `Contact from ${name}` : 'Contact from KenwayRogers.com';
-        const body = `From: ${name ? name + ' ' : ''}<${email}>\n\n${message}`;
+        const subject = 'Contact from KenwayRogers.com';
+        const body = message;
         if (kind === 'gmail') {
           const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           window.open(gmailUrl, '_blank', 'noopener');
