@@ -264,37 +264,40 @@ function openEmail(form, kind, closeModal) {
   
   if (kind === 'gmail') {
     const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
-    const gmailAppUrl = `googlegmail://co?to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
     
-    // On mobile, try Gmail app first, then fall back to web
-    // Create an invisible iframe to test the app URL
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+    // Detect mobile using touch capability (more reliable than user agent)
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    let appOpened = false;
-    
-    // Listen for visibility change (app opening will hide the page)
-    const visibilityHandler = () => {
-      if (document.hidden) {
-        appOpened = true;
-      }
-    };
-    document.addEventListener('visibilitychange', visibilityHandler);
-    
-    // Try the app URL
-    iframe.src = gmailAppUrl;
-    
-    // After a short delay, open web version if app didn't open
-    setTimeout(() => {
-      document.removeEventListener('visibilitychange', visibilityHandler);
-      document.body.removeChild(iframe);
+    if (isMobile) {
+      // On mobile: try mailto first (opens Gmail app if installed and set as default)
+      // mailto is handled natively by the OS, which will open the Gmail app if it's the default
+      const mailto = `mailto:kenwayrogers@gmail.com${body ? `?body=${encodeURIComponent(body)}` : ''}`;
       
-      if (!appOpened) {
-        // App didn't open, use web version
-        window.open(gmailWebUrl, '_blank', 'noopener');
+      // Try mailto in a hidden iframe to avoid navigation
+      const iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      
+      try {
+        iframe.contentWindow.location.href = mailto;
+      } catch (e) {
+        // If iframe fails, try direct location
+        window.location.href = mailto;
       }
-    }, 500);
+      
+      // After 1 second, if we're still on the page, the app probably didn't open
+      // Open Gmail web as fallback
+      setTimeout(() => {
+        document.body.removeChild(iframe);
+        // Check if page is still visible (if app opened, page would be hidden)
+        if (!document.hidden) {
+          window.open(gmailWebUrl, '_blank', 'noopener');
+        }
+      }, 1000);
+    } else {
+      // On desktop: directly open Gmail web interface
+      window.open(gmailWebUrl, '_blank', 'noopener');
+    }
   } else {
     // For other email clients, use mailto
     const mailto = `mailto:kenwayrogers@gmail.com?body=${encodeURIComponent(body)}`;
