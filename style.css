@@ -13,6 +13,7 @@ body {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   display: block;
   overflow: hidden;
   color: #fff;
@@ -58,6 +59,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
   padding: 64px 16px;
 }
 

@@ -263,9 +263,40 @@ function openEmail(form, kind, closeModal) {
   const body = message;
   
   if (kind === 'gmail') {
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
-    window.open(gmailUrl, '_blank', 'noopener');
+    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
+    const gmailAppUrl = `googlegmail://co?to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
+    
+    // On mobile, try Gmail app first, then fall back to web
+    // Create an invisible iframe to test the app URL
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    
+    let appOpened = false;
+    
+    // Listen for visibility change (app opening will hide the page)
+    const visibilityHandler = () => {
+      if (document.hidden) {
+        appOpened = true;
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityHandler);
+    
+    // Try the app URL
+    iframe.src = gmailAppUrl;
+    
+    // After a short delay, open web version if app didn't open
+    setTimeout(() => {
+      document.removeEventListener('visibilitychange', visibilityHandler);
+      document.body.removeChild(iframe);
+      
+      if (!appOpened) {
+        // App didn't open, use web version
+        window.open(gmailWebUrl, '_blank', 'noopener');
+      }
+    }, 500);
   } else {
+    // For other email clients, use mailto
     const mailto = `mailto:kenwayrogers@gmail.com?body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   }
