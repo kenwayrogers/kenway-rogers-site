@@ -265,35 +265,40 @@ function openEmail(form, kind, closeModal) {
   if (kind === 'gmail') {
     const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
     
-    // Detect mobile using touch capability (more reliable than user agent)
-    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    // Detect mobile using multiple signals for better accuracy
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
+                     (navigator.maxTouchPoints > 0 && window.innerWidth < 1024);
     
     if (isMobile) {
       // On mobile: try mailto first (opens Gmail app if installed and set as default)
-      // mailto is handled natively by the OS, which will open the Gmail app if it's the default
       const mailto = `mailto:kenwayrogers@gmail.com${body ? `?body=${encodeURIComponent(body)}` : ''}`;
       
-      // Try mailto in a hidden iframe to avoid navigation
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+      let fallbackOpened = false;
+      let cleanupTimer = null;
       
-      try {
-        iframe.contentWindow.location.href = mailto;
-      } catch (e) {
-        // If iframe fails, try direct location
-        window.location.href = mailto;
-      }
+      // Track if page becomes hidden (indicates app opened)
+      const visibilityHandler = () => {
+        if (document.hidden) {
+          // App opened successfully, cancel fallback
+          if (cleanupTimer) clearTimeout(cleanupTimer);
+          fallbackOpened = true;
+        }
+      };
       
-      // After 1 second, if we're still on the page, the app probably didn't open
-      // Open Gmail web as fallback
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-        // Check if page is still visible (if app opened, page would be hidden)
-        if (!document.hidden) {
+      document.addEventListener('visibilitychange', visibilityHandler, { once: true });
+      
+      // Try mailto - use direct location change for better compatibility
+      window.location.href = mailto;
+      
+      // Fallback to Gmail web if app doesn't open
+      cleanupTimer = setTimeout(() => {
+        document.removeEventListener('visibilitychange', visibilityHandler);
+        
+        // Only open fallback if page is still visible
+        if (!document.hidden && !fallbackOpened) {
           window.open(gmailWebUrl, '_blank', 'noopener');
         }
-      }, 1000);
+      }, 1500); // Increased to 1.5s for slower devices
     } else {
       // On desktop: directly open Gmail web interface
       window.open(gmailWebUrl, '_blank', 'noopener');
