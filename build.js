@@ -123,7 +123,7 @@ function buildPages() {
     // Determine nav type from path
     let navType = 'home';
     if (relativePath.includes('case')) navType = 'case';
-    else if (relativePath.includes('provenance') || relativePath.includes('acquisition') || relativePath.includes('field-investigation')) {
+    else if (relativePath.includes('origins') || relativePath.includes('retrieval') || relativePath.includes('field-investigation')) {
       navType = 'services';
     }
     
