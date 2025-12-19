@@ -54,10 +54,10 @@ To migrate existing pages:
 2. Replace common sections with placeholders
 3. Run `npm run build`
 4. Check the generated file in the root directory
-# kenway-rogers-site
-Website for Kenway Rogers
+# rarefinder-site
+Website for Rarefinder
 
-This repository contains a simple static site for Kenway Rogers — Treasure Hunter.
+This repository contains a simple static site for Rarefinder — Treasure Hunter.
 
 Running locally:
 
@@ -95,7 +95,7 @@ Contact form & email behavior (static site)
 This site uses a client-side `mailto:` approach for the contact modal — there is no backend or 3rd-party form dependency.
 
 How it works:
-- When a user fills the contact form and clicks "Send Message", JavaScript builds a `mailto:` URI (to `kenwayrogers@gmail.com`) with a subject and message body prefilled.
+- When a user fills the contact form and clicks "Send Message", JavaScript builds a `mailto:` URI (to `james.rarefinder@gmail.com`) with a subject and message body prefilled.
 - This opens the user's default email client (desktop or web client configured to handle mailto links). The user then sends the message directly from their email client.
  
 Gmail integration (web)

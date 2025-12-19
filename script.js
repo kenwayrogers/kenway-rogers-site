@@ -263,7 +263,7 @@ function openEmail(form, kind, closeModal) {
   const body = message;
   
   if (kind === 'gmail') {
-    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
+    const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=james.rarefinder@gmail.com&body=${encodeURIComponent(body)}`;
     
     // Detect mobile using multiple signals for better accuracy
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || 
@@ -271,7 +271,7 @@ function openEmail(form, kind, closeModal) {
     
     if (isMobile) {
       // On mobile: try mailto first (opens Gmail app if installed and set as default)
-      const mailto = `mailto:kenwayrogers@gmail.com${body ? `?body=${encodeURIComponent(body)}` : ''}`;
+      const mailto = `mailto:james.rarefinder@gmail.com${body ? `?body=${encodeURIComponent(body)}` : ''}`;
       
       let fallbackOpened = false;
       let cleanupTimer = null;
@@ -305,7 +305,7 @@ function openEmail(form, kind, closeModal) {
     }
   } else {
     // For other email clients, use mailto
-    const mailto = `mailto:kenwayrogers@gmail.com?body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:james.rarefinder@gmail.com?body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   }
   

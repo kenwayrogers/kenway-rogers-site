@@ -152,10 +152,10 @@ function openEmail(form, kind, closeModal) {
   const body = message;
   
   if (kind === 'gmail') {
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=kenwayrogers@gmail.com&body=${encodeURIComponent(body)}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=james.rarefinder@gmail.com&body=${encodeURIComponent(body)}`;
     window.open(gmailUrl, '_blank', 'noopener');
   } else {
-    const mailto = `mailto:kenwayrogers@gmail.com?body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:james.rarefinder@gmail.com?body=${encodeURIComponent(body)}`;
     window.location.href = mailto;
   }
   

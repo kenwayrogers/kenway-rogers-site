@@ -1,7 +1,7 @@
 {
-  "name": "kenway-rogers-site",
+  "name": "rarefinder-site",
   "version": "1.0.0",
-  "description": "Kenway Rogers treasure hunter website",
+  "description": "Rarefinder treasure hunter website",
   "scripts": {
     "build": "node build.js",
     "build:js": "node bundle-js.js",
@@ -13,7 +13,7 @@
     "watch": "node build.js --watch"
   },
   "keywords": [],
-  "author": "Kenway Rogers",
+  "author": "Rarefinder",
   "license": "MIT",
   "devDependencies": {}
 }
