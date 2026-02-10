@@ -131,7 +131,31 @@ body {
   font-size: 17px;
   line-height: 1.7;
   color: #5a4a3a;
+  margin: 0 0 18px;
+}
+.mystery-list {
+  list-style: none;
+  padding: 0;
   margin: 0 0 28px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.mystery-list li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #5a4a3a;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+}
+.mystery-list li:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #8b6f47;
+  font-weight: bold;
 }
 .btn-contact {
   display: inline-flex;
